@@ -14,7 +14,7 @@ const config = {
   },
   devServer: {
     proxy: {
-      '/api': 'http://localhost:3000'
+      '/api': 'http://192.168.32.138:3000'
     },
     historyApiFallback: true,
     inline: true,
