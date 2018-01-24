@@ -11,7 +11,6 @@ function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
-
 const config = {
   entry: {
     main: resolve('src/main.js'),
@@ -22,10 +21,10 @@ const config = {
     filename: 'js/[name].[chunkhash:8].js'
   },
   resolve: {
-    extensions: ['.js', '.vue', '.css', '.scss'],
+    extensions: ['.js', '.jsx', '.css', '.scss'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'reduxs': resolve('src/redux'),
       'components': resolve('src/components'),
       'containers': resolve('src/containers'),
       'static': resolve('src/static'),
@@ -35,7 +34,7 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/
       },
@@ -63,16 +62,6 @@ const config = {
           }
           ]
         })
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            scss: 'vue-style-loader!css-loader!sass-loader',
-            sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-          }
-        }
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -106,7 +95,7 @@ const config = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',
-      filename: '/js/[name].[chunkhash:8].js'
+      filename: 'js/[name].[chunkhash:8].js'
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
