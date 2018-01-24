@@ -1,3 +1,5 @@
+### webpack 配置解释
+```
 // 取文件目录
 const path = require('path');
 // webpack插件
@@ -173,3 +175,5 @@ const config = {
 }
 
 module.exports = config;
+
+```
