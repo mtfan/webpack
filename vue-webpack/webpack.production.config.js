@@ -103,6 +103,7 @@ const config = {
   plugins: [
     new CleanWebpackPlugin(['build']),
     new webpack.BannerPlugin('huleimail@qq.com'),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',

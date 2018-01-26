@@ -127,6 +127,8 @@ const config = {
     new CleanWebpackPlugin(['build']),
     // 代码加版权
     new webpack.BannerPlugin('huleimail@qq.com'),
+    // 启用作用域提升，作用是让代码文件更小、运行的更快
+    new webpack.optimize.ModuleConcatenationPlugin(),
     // 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
     new webpack.optimize.OccurrenceOrderPlugin(),
     // 抽取公共的js 命名未common.xxxx.js
