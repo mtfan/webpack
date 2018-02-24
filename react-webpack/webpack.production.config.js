@@ -98,6 +98,8 @@ const config = {
   plugins: [
     new CleanWebpackPlugin(['build']),
     new BundleAnalyzerPlugin(),
+    new webpack.NamedChunksPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.BannerPlugin('huleimail@qq.com'),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
