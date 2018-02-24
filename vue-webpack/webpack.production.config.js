@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const pkg = require('./package.json');
 
@@ -107,6 +108,7 @@ const config = {
   },
   plugins: [
     new CleanWebpackPlugin(['build']),
+    new BundleAnalyzerPlugin(),
     new webpack.BannerPlugin('huleimail@qq.com'),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
