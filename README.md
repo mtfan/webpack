@@ -39,6 +39,16 @@ const config = {
     path: resolve('build'),
     filename: 'js/[name].[chunkhash:8].js'
   },
+  devServer: {
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }, // 代理接口
+    historyApiFallback: true, //任意的跳转或404响应可以指向 index.html 页面
+    inline: true, // 自动刷新
+    hot: true, // 热更新
+    port: 8080, // 端口
+    overlay: true // 编译错误显示页面
+  },
   /**
    * resolve 模块解析
    * extensions 导入文件不用加后缀

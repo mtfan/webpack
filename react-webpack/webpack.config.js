@@ -7,11 +7,12 @@ function resolve(dir) {
 
 const config = {
   entry: {
-    main: ['webpack-hud',resolve('src/main.js')]
+    main: resolve('src/main.js')
   },
   output: {
     filename: "bundle.js"
   },
+  
   devServer: {
     proxy: {
       '/api': 'http://localhost:3000'
@@ -19,7 +20,8 @@ const config = {
     historyApiFallback: true,
     inline: true,
     hot: true,
-    port: 8080
+    port: 8080,
+    overlay: true
   },
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss'],
@@ -77,6 +79,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: resolve('index.html'),
     }),
+    // 模块热更新
     new webpack.HotModuleReplacementPlugin()
   ]
 }

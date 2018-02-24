@@ -7,19 +7,20 @@ function resolve(dir) {
 
 const config = {
   entry: {
-    main: ['webpack-hud',resolve('src/main.js')]
+    main: resolve('src/main.js')
   },
   output: {
     filename: "bundle.js"
   },
   devServer: {
     proxy: {
-      '/api': 'http://192.168.32.138:3000'
+      '/api': 'http://localhost:3000'
     },
     historyApiFallback: true,
     inline: true,
     hot: true,
-    port: 8080
+    port: 8080,
+    overlay: true
   },
   resolve: {
     extensions: ['.js', '.vue', '.css', '.scss'],
