@@ -12,6 +12,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 // 删除文件
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+// 可视化工具
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // 生产需要模块
 const pkg = require('./package.json');
@@ -135,6 +137,8 @@ const config = {
   plugins: [
     // 打包前删除build目录
     new CleanWebpackPlugin(['build']),
+    // 可视化工具,查看模块之间的依赖，方便查看那些可以性能优化
+    new BundleAnalyzerPlugin(),
     // 代码加版权
     new webpack.BannerPlugin('huleimail@qq.com'),
     // 启用作用域提升，作用是让代码文件更小、运行的更快
