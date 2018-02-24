@@ -41,6 +41,13 @@ const config = {
     path: resolve('build'),
     filename: 'js/[name].[chunkhash:8].js'
   },
+  /**
+   * 方便调试dug显示开发代码
+   * 开发环境：cheap-module-eval-source-map 
+   * 生产环境：cheap-module-source-map
+   * 提示：线上一般不需要配置
+  /
+  devtool: 'cheap-module-source-map',  
   devServer: {
     proxy: {
       '/api': 'http://localhost:3000'
@@ -154,7 +161,8 @@ const config = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
-      }
+      },
+      sourceMap: true
     }),
     // 分离css
     new ExtractTextPlugin({

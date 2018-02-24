@@ -21,6 +21,7 @@ const config = {
     path: resolve('build'),
     filename: 'js/[name].[chunkhash:8].js'
   },
+  devtool: 'cheap-module-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss'],
     alias: {
@@ -110,7 +111,8 @@ const config = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
-      }
+      },
+      sourceMap: true
     }),
     new ExtractTextPlugin({
       filename: "css/[name].[chunkhash:8].css"

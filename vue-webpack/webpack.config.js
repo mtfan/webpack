@@ -12,6 +12,7 @@ const config = {
   output: {
     filename: "bundle.js"
   },
+  devtool: 'cheap-module-eval-source-map', 
   devServer: {
     proxy: {
       '/api': 'http://localhost:3000'
