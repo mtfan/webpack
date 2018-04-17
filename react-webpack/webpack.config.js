@@ -76,6 +76,9 @@ const config = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
+    }),
     new HtmlWebpackPlugin({
       template: resolve('index.html'),
     }),

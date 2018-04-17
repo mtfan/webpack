@@ -5,6 +5,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const pkg = require('./package.json');
 
@@ -139,6 +140,9 @@ const config = {
     }),
     new webpack.DefinePlugin({
       __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
+    }),
+    new ServiceWorkerWebpackPlugin({
+      entry: resolve('src/sw.js')
     })
   ]
 }

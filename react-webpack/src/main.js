@@ -7,6 +7,7 @@ import configureStore from './redux/store';
 import Router from './router';
 import 'util/axios';
 import 'static/css/reset';
+import './registerSw';
 
 fastclick.attach(document.body);
 
