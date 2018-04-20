@@ -139,7 +139,8 @@ const config = {
       }
     }),
     new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
+      __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false')),
+      CACHE_VERSION: new Date().getTime()
     }),
     new ServiceWorkerWebpackPlugin({
       entry: resolve('src/sw.js')

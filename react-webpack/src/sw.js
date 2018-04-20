@@ -1,5 +1,5 @@
 // 缓存版本
-var CACHE_NAME = "nono_cache_v1";
+var CACHE_NAME = 'MZJF_CACHE_'+CACHE_VERSION;
 // 缓存文件
 var urlsToCache = global.serviceWorkerOption.assets;
 
@@ -15,7 +15,7 @@ self.addEventListener('install', function (event) {
 self.addEventListener('activate', function (event) {
     event.waitUntil(caches.keys().then(function (cacheNames) {
         return Promise.all(cacheNames.map(function (cacheName) {
-            if(cacheName.indexOf('nono')>-1){
+            if(cacheName.indexOf('MZJF_CACHE')>-1){
                 return caches.delete(cacheName);
             }
         }));
