@@ -1,4 +1,11 @@
+### 修复 sass 报错
+
+```
+npm rebuild node-sass
+```
+
 ### webpack 配置解释
+
 ```
 // 取文件目录
 const path = require('path');
@@ -43,7 +50,7 @@ const config = {
   },
   /**
    * 方便调试dug显示开发代码
-   * 开发环境：cheap-module-eval-source-map 
+   * 开发环境：cheap-module-eval-source-map
    * 生产环境：cheap-module-source-map
    * 提示：线上一般不需要配置
   /
@@ -199,5 +206,4 @@ const config = {
 }
 
 module.exports = config;
-
 ```
