@@ -6,13 +6,14 @@ function resolve(dir) {
 }
 
 const config = {
+  mode: 'development',
   entry: {
     main: resolve('src/main.js')
   },
   output: {
-    filename: "bundle.js"
+    filename: 'bundle.js'
   },
-  devtool: 'cheap-module-eval-source-map', 
+  devtool: 'cheap-module-eval-source-map',
   devServer: {
     proxy: {
       '/api': 'http://localhost:3000'
@@ -27,11 +28,11 @@ const config = {
     extensions: ['.js', '.jsx', '.css', '.scss'],
     alias: {
       '@': resolve('src'),
-      'reduxs': resolve('src/redux'),
-      'components': resolve('src/components'),
-      'containers': resolve('src/containers'),
-      'static': resolve('src/static'),
-      'util': resolve('src/util'),
+      reduxs: resolve('src/redux'),
+      components: resolve('src/components'),
+      containers: resolve('src/containers'),
+      static: resolve('src/static'),
+      util: resolve('src/util')
     }
   },
   module: {
@@ -77,14 +78,16 @@ const config = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
+      __DEV__: JSON.stringify(
+        JSON.parse(process.env.NODE_ENV == 'dev' || 'false')
+      )
     }),
     new HtmlWebpackPlugin({
-      template: resolve('index.html'),
+      template: resolve('index.html')
     }),
     // 模块热更新
     new webpack.HotModuleReplacementPlugin()
   ]
-}
+};
 
 module.exports = config;
