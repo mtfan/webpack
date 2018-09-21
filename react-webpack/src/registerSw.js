@@ -1,10 +1,9 @@
-
 if (navigator.serviceWorker && __DEV__) {
-  // 执行注册    
+  // 执行注册
   navigator.serviceWorker
-    .register('./sw.js', { scope: './' })//当前作用域
-    .then(function (registration) {
-      console.log('ServiceWorker 注册成功！作用域为: ', registration.scope)
+    .register('./sw.js', { scope: './' }) //当前作用域
+    .then(function(registration) {
+      console.log('ServiceWorker 注册成功！作用域为: ', registration.scope);
     })
     .catch(err => console.log('ServiceWorker 注册失败: ', err));
 } else {
