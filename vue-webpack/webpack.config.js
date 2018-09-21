@@ -1,18 +1,20 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const path = require('path');
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
 const config = {
+  mode: 'development',
   entry: {
     main: resolve('src/main.js')
   },
   output: {
-    filename: "bundle.js"
+    filename: 'bundle.js'
   },
-  devtool: 'cheap-module-eval-source-map', 
+  devtool: 'cheap-module-eval-source-map',
   devServer: {
     proxy: {
       '/api': 'http://localhost:3000'
@@ -26,12 +28,12 @@ const config = {
   resolve: {
     extensions: ['.js', '.vue', '.css', '.scss'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
+      vue$: 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      'components': resolve('src/components'),
-      'containers': resolve('src/containers'),
-      'static': resolve('src/static'),
-      'util': resolve('src/util'),
+      components: resolve('src/components'),
+      containers: resolve('src/containers'),
+      static: resolve('src/static'),
+      util: resolve('src/util')
     }
   },
   module: {
@@ -86,11 +88,12 @@ const config = {
     ]
   },
   plugins: [
+    new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      template: resolve('index.html'),
+      template: resolve('index.html')
     }),
     new webpack.HotModuleReplacementPlugin()
   ]
-}
+};
 
 module.exports = config;
