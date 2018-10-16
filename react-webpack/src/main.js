@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import fastclick from 'fastclick';
 
-import configureStore from './redux/store';
+import storeConfig from './redux/store';
+const { persistor, store } = storeConfig();
+import { PersistGate } from 'redux-persist/integration/react';
+
 import Router from './router';
 import 'util/axios';
 import 'static/css/reset';
@@ -11,11 +14,11 @@ import './registerSw';
 
 fastclick.attach(document.body);
 
-const store = configureStore();
-
 ReactDOM.render(
   <Provider store={store}>
-    <Router />
+    <PersistGate loading={null} persistor={persistor}>
+      <Router />
+    </PersistGate>
   </Provider>,
   document.getElementById('app')
 );
