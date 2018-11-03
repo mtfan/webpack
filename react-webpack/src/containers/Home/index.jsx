@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component,Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Button} from 'antd-mobile';
 import axios from 'axios'
@@ -29,10 +29,12 @@ class Home extends Component {
 
   render() {
     return (
-      <section>
-        {this.props.react}
-        <Button onClick={this.onChange}>click</Button>
+      <Fragment>
+        <section>
+          {this.props.react}
+          <Button onClick={this.onChange}>click</Button>
         </section>
+      </Fragment>
     );
   }
 }
