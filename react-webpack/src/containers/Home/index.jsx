@@ -15,7 +15,7 @@ class Home extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     axios.get('/api/current')
       .then(res => {
         console.log(res);
