@@ -1,10 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const pkg = require('./package.json');
@@ -14,6 +15,7 @@ function resolve(dir) {
 }
 
 const config = {
+  mode: 'production',
   entry: {
     main: resolve('src/main.js'),
     vendor: Object.keys(pkg.dependencies)
@@ -22,16 +24,16 @@ const config = {
     path: resolve('build'),
     filename: 'js/[name].[chunkhash:8].js'
   },
-  devtool: 'cheap-module-source-map',
+  // devtool: 'cheap-module-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss'],
     alias: {
       '@': resolve('src'),
-      'reduxs': resolve('src/redux'),
-      'components': resolve('src/components'),
-      'containers': resolve('src/containers'),
-      'static': resolve('src/static'),
-      'util': resolve('src/util')
+      reduxs: resolve('src/redux'),
+      components: resolve('src/components'),
+      containers: resolve('src/containers'),
+      static: resolve('src/static'),
+      util: resolve('src/util')
     }
   },
   module: {
@@ -44,25 +46,31 @@ const config = {
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [{
-            loader: "css-loader",
-          }, {
-            loader: 'postcss-loader'
-          }]
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader'
+            },
+            {
+              loader: 'postcss-loader'
+            }
+          ]
         })
       },
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: [{
-            loader: "css-loader",
-          }, {
-            loader: "sass-loader"
-          }, {
-            loader: 'postcss-loader'
-          }
+          use: [
+            {
+              loader: 'css-loader'
+            },
+            {
+              loader: 'sass-loader'
+            },
+            {
+              loader: 'postcss-loader'
+            }
           ]
         })
       },
@@ -76,7 +84,7 @@ const config = {
               name: 'img/[name].[hash:8].[ext]'
             }
           },
-          "img-loader"
+          'img-loader'
         ]
       },
       {
@@ -105,27 +113,42 @@ const config = {
     new webpack.BannerPlugin('huleimail@qq.com'),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-      filename: 'js/[name].[chunkhash:8].js'
+    new webpack.optimize.SplitChunksPlugin({
+      cacheGroups: {
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        },
+        commons: {
+          chunks: 'initial',
+          minChunks: 2,
+          maxInitialRequests: 5,
+          minSize: 0,
+          name: 'commons'
+        },
+        //打包第三方类库
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+          minChunks: Infinity
+        }
+      }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      sourceMap: true
+    new webpack.optimize.RuntimeChunkPlugin({
+      name: 'manifest'
     }),
     new ExtractTextPlugin({
-      filename: "css/[name].[chunkhash:8].css"
+      filename: 'css/[name].[chunkhash:8].css'
     }),
     new OptimizeCssAssetsPlugin({
       cssProcessor: require('cssnano'),
-      cssProcessorOptions: {discardComments: {removeAll: true}},
+      cssProcessorOptions: { discardComments: { removeAll: true } },
       canPrint: true
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
     new HtmlWebpackPlugin({
@@ -139,13 +162,15 @@ const config = {
       }
     }),
     new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false')),
+      __DEV__: JSON.stringify(
+        JSON.parse(process.env.NODE_ENV == 'dev' || 'false')
+      ),
       CACHE_VERSION: new Date().getTime()
     }),
     new ServiceWorkerWebpackPlugin({
       entry: resolve('src/sw.js')
     })
   ]
-}
+};
 
 module.exports = config;
