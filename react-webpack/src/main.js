@@ -8,9 +8,8 @@ const { persistor, store } = storeConfig();
 import { PersistGate } from 'redux-persist/integration/react';
 
 import Router from './router';
-import 'util/axios';
-import 'static/css/reset';
-import './registerSw';
+import 'utils/axios';
+import 'static/sass/common/_base';
 
 fastclick.attach(document.body);
 

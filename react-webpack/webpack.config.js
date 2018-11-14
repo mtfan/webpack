@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -16,7 +17,7 @@ const config = {
   devtool: 'cheap-module-eval-source-map',
   devServer: {
     proxy: {
-      '/api': 'http://localhost:3000'
+      '/api': 'http://localhost:7878'
     },
     historyApiFallback: true,
     inline: true,
@@ -30,14 +31,14 @@ const config = {
       '@': resolve('src'),
       reduxs: resolve('src/redux'),
       components: resolve('src/components'),
-      containers: resolve('src/containers'),
+      views: resolve('src/views'),
+      api: resolve('src/api'),
       static: resolve('src/static'),
-      util: resolve('src/util')
+      utils: resolve('src/utils')
     }
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/
@@ -83,7 +84,8 @@ const config = {
       )
     }),
     new HtmlWebpackPlugin({
-      template: resolve('index.html')
+      template: resolve('index.html'),
+      favicon: resolve('favicon.ico')
     }),
     // 模块热更新
     new webpack.HotModuleReplacementPlugin()

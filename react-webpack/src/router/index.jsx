@@ -1,22 +1,14 @@
-import React from 'react'
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import React from 'react';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
-import Home from 'containers/Home';
-import Product from 'containers/Product';
-
+import Tabs from 'views/Tabs';
 const Router = () => {
   return (
-    <BrowserRouter>
-      <div>
-        <Switch>
-          <Route path='/home' component={Home}></Route>
-          <Route path='/product' component={Product}></Route>
-          <Route  component={Home}></Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
-  )
-}
+    <HashRouter>
+      <Switch>
+        <Route path="*" component={Tabs} />
+      </Switch>
+    </HashRouter>
+  );
+};
 export default Router;
-
-
