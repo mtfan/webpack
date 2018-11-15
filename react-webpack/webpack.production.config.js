@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
@@ -23,7 +23,6 @@ const config = {
     path: resolve('build'),
     filename: 'js/[name].[chunkhash:8].js'
   },
-  // devtool: 'cheap-module-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss'],
     alias: {
@@ -44,32 +43,23 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [{
-              loader: 'css-loader'
-            },
-            {
-              loader: 'postcss-loader'
-            }
-          ]
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader'
+          }
+        ]
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [{
-              loader: 'css-loader'
-            },
-            {
-              loader: 'sass-loader'
-            },
-            {
-              loader: 'postcss-loader'
-            }
-          ]
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader'
+          }
+        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -134,7 +124,7 @@ const config = {
     new webpack.optimize.RuntimeChunkPlugin({
       name: 'manifest'
     }),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: 'css/[name].[chunkhash:8].css'
     }),
     new OptimizeCssAssetsPlugin({
