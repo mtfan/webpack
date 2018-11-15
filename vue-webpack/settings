@@ -1,8 +1,0 @@
-{
-    "explorer.confirmDelete": false,
-    "editor.tabSize": 2,
-    "git.autofetch": true,
-    "vetur.format.defaultFormatter.html": "js-beautify-html",
-    "editor.formatOnSave": true,
-    "prettier.singleQuote": true,
-}
