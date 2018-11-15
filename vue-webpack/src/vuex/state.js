@@ -1,5 +1,7 @@
 const state = {
-  home: {'webpack':'vue'},
+  user: {
+    username: '张某'
+  }
 }
 
 export default state

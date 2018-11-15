@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
@@ -23,55 +23,44 @@ const config = {
     path: resolve('build'),
     filename: 'js/[name].[chunkhash:8].js'
   },
-  devtool: 'cheap-module-source-map',
+  // devtool: 'cheap-module-source-map',
   resolve: {
     extensions: ['.js', '.vue', '.css', '.scss'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
       '@': resolve('src'),
       components: resolve('src/components'),
-      containers: resolve('src/containers'),
+      views: resolve('src/views'),
+      api: resolve('src/api'),
       static: resolve('src/static'),
-      util: resolve('src/util')
+      utils: resolve('src/utils')
     }
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader'
-            },
-            {
-              loader: 'postcss-loader'
-            }
-          ]
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader'
+          }
+        ]
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader'
-            },
-            {
-              loader: 'sass-loader'
-            },
-            {
-              loader: 'postcss-loader'
-            }
-          ]
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader'
+          }
+        ]
       },
       {
         test: /\.vue$/,
@@ -85,8 +74,7 @@ const config = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        use: [
-          {
+        use: [{
             loader: 'url-loader',
             options: {
               limit: 10000,
@@ -146,12 +134,16 @@ const config = {
     new webpack.optimize.RuntimeChunkPlugin({
       name: 'manifest'
     }),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: 'css/[name].[chunkhash:8].css'
     }),
     new OptimizeCssAssetsPlugin({
       cssProcessor: require('cssnano'),
-      cssProcessorOptions: { discardComments: { removeAll: true } },
+      cssProcessorOptions: {
+        discardComments: {
+          removeAll: true
+        }
+      },
       canPrint: true
     }),
     new webpack.DefinePlugin({
@@ -161,6 +153,7 @@ const config = {
     }),
     new HtmlWebpackPlugin({
       template: resolve('index.html'),
+      favicon: resolve('favicon.ico'),
       hash: true,
       minify: {
         caseSensitive: false,
@@ -168,11 +161,6 @@ const config = {
         removeEmptyAttributes: true,
         collapseWhitespace: true
       }
-    }),
-    new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(
-        JSON.parse(process.env.NODE_ENV == 'dev' || 'false')
-      )
     })
   ]
 };

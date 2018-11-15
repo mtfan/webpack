@@ -1,6 +1,11 @@
 import axios from 'axios';
-import { Toast } from 'antd-mobile';
-import { GlobalParameters } from 'utils/config';
+import {
+  Indicator,
+  Toast
+} from 'mint-ui';
+import {
+  GlobalParameters
+} from 'utils/config';
 
 export default (function (config) {
   let locat = 'http://localhost:8080';
@@ -25,27 +30,33 @@ export default (function (config) {
       } else {
         config.data = Object.assign(GlobalParameters, config.data);
       }
-      Toast.loading('加载中', 0);
+      Indicator.open('加载中...');
       return config;
     },
     function (err) {
-      Toast.hide();
-      Toast.offline('服务器异常 !!!', 3);
+      Indicator.close();
+      Toast({
+        message: '服务器异常!!!',
+        duration: 3000
+      });
       return Promise.reject(err);
     }
   );
 
   instance.interceptors.response.use(
     function (res) {
-      Toast.hide();
+      Indicator.close();
       if (!res.data.succeed) {
         Toast.info(res.errorMessage, 3);
       }
       return res.data;
     },
     function (err) {
-      Toast.hide();
-      Toast.offline('服务器异常 !!!', 3);
+      Indicator.close();
+      Toast({
+        message: '服务器异常!!!',
+        duration: 3000
+      });
       return Promise.reject(err);
     }
   );

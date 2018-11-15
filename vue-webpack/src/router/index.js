@@ -3,14 +3,17 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '/home',
-      component: resolve => require(['containers/home'], resolve)
+      component: resolve => require(['views/Home'], resolve)
     },
     {
-      path: '/product',
-      component: resolve => require(['containers/product'], resolve)
+      path: '/found',
+      component: resolve => require(['views/Found'], resolve)
+    },
+    {
+      path: '/mine',
+      component: resolve => require(['views/Mine'], resolve)
     },
     {
       path: '/',

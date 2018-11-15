@@ -1,11 +1,10 @@
 <template>
-  <div>product</div>
+  <div>Mine</div>
 </template>
 
 <script type="text/ecmascript-6">
-  export default {}
+export default {};
 </script>
 
 <style lang="scss">
-
 </style>

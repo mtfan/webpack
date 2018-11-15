@@ -1,7 +1,8 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path');
+
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -17,7 +18,7 @@ const config = {
   devtool: 'cheap-module-eval-source-map',
   devServer: {
     proxy: {
-      '/api': 'http://localhost:3000'
+      '/api': 'http://localhost:7878'
     },
     historyApiFallback: true,
     inline: true,
@@ -31,17 +32,19 @@ const config = {
       vue$: 'vue/dist/vue.esm.js',
       '@': resolve('src'),
       components: resolve('src/components'),
-      containers: resolve('src/containers'),
+      views: resolve('src/views'),
+      api: resolve('src/api'),
       static: resolve('src/static'),
-      util: resolve('src/util')
+      utils: resolve('src/utils')
     }
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: "babel-loader"
+        }
       },
       {
         test: /\.css$/,
@@ -90,7 +93,8 @@ const config = {
   plugins: [
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      template: resolve('index.html')
+      template: resolve('index.html'),
+      favicon: resolve('favicon.ico')
     }),
     new webpack.HotModuleReplacementPlugin()
   ]

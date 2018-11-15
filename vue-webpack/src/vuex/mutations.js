@@ -1,8 +1,11 @@
 import * as type from './mutation-types'
 
 const mutations = {
-  [type.SET_HOME](state, home) {
-    state.home = home;
+  [type.USER](state, data) {
+    state.user = data;
+  },
+  [type.USER_INFO](state, data) {
+    state.user = data;
   }
 
 }
