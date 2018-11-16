@@ -1,9 +1,10 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-Vue.use(Router)
+import Vue from 'vue';
+import Router from 'vue-router';
+Vue.use(Router);
 
-export default new Router({
-  routes: [{
+let router = new Router({
+  routes: [
+    {
       path: '/home',
       component: resolve => require(['views/Home'], resolve)
     },
@@ -20,4 +21,15 @@ export default new Router({
       redirect: '/home'
     }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.path != '/login') {
+    if (true) {
+      next({ path: '/login' });
+      return;
+    }
+  }
+  next();
+});
+export default router;
