@@ -7,6 +7,9 @@ import router from './router';
 import store from './vuex';
 import 'mint-ui/lib/style.css';
 
+import Vconsole from 'vconsole'
+const vConsole = new Vconsole();
+
 Vue.use(Mint);
 Vue.config.productionTip = false;
 

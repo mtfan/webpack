@@ -10,6 +10,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import Router from './router';
 import 'static/sass/common/_base';
 
+import Vconsole from 'vconsole'
+const vConsole = new Vconsole();
 fastclick.attach(document.body);
 
 ReactDOM.render(

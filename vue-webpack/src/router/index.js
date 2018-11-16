@@ -25,7 +25,7 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.path != '/login') {
-    if (true) {
+    if (false) {
       next({ path: '/login' });
       return;
     }
