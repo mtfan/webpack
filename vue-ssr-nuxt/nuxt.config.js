@@ -43,18 +43,19 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~plugins/mint-ui' }],
+  plugins: [{ src: '~plugins/mint-ui', ssr: true }],
 
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/style-resources'],
-
+  modules: ['@nuxtjs/axios', '@nuxtjs/proxy', '@nuxtjs/style-resources'],
+  proxy: [['/api', { target: 'http://localhost:7878' }]],
   /*
    ** Build configuration
    */
   build: {
-    vendor: ['mint-ui'],
+    // 防止被多次打包
+    vendor: ['mint-ui', 'axios'],
     styleResources: {
       scss: './assets/sass/common/_variables.scss'
     },
