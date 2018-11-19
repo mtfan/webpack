@@ -1,0 +1,224 @@
+@import './_mixins.scss';
+@import './_reset.scss';
+@import './_grid.scss';
+$base-font-color: #333 !default;
+$positive-font-color: #666 !default;
+$main-color: #ff6b69;
+$font-size-base: 14px !default;
+$font-family-base: '-apple-system', 'Helvetica Neue', 'Roboto', 'Segoe UI',
+  sans-serif !default;
+$line-height-computed: 20px !default;
+
+$content-padding: 15px;
+
+$button-disabled-bg-color: #e1e1e1 !default;
+
+// item.scss
+$input-color: #424242 !default;
+$input-label-color: #212121 !default;
+$border-color: #e2e2e2;
+
+.grey {
+  color: #999 !important;
+}
+
+html,
+body {
+  width: 100%;
+  font-size: 14px;
+  color: #4a4a4a;
+  background-color: #fff;
+  overflow-y: scroll;
+  line-height: 1.4;
+  height: 100%;
+}
+
+.scroll-content {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  padding: 45px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.platform-ios .scroll-content {
+  @extend .scroll-content;
+  padding-top: 65px;
+}
+
+.main-font-color {
+  color: $base-font-color !important;
+}
+
+.positive-font-color {
+  color: $main-color !important;
+}
+
+.main-bg-color {
+  background: $main-color !important;
+}
+
+.font-color-666 {
+  color: #666;
+}
+
+.white-color {
+  color: #fff;
+}
+
+.mid-chunk {
+  background: #f5f5f5;
+  height: 10px;
+}
+
+.suffix-color {
+  background: #ffb417;
+}
+
+.white-bg {
+  background: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+[v-cloak] {
+  display: none !important;
+}
+
+.full-width {
+  width: 100%;
+}
+
+img {
+  width: 100%;
+}
+
+.relative {
+  position: relative;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/**
+ * button
+ * --------------------------------------------------
+ */
+
+.button {
+  outline: none;
+  margin: 0;
+  padding: 0 12px;
+  min-height: 44px;
+  border: none;
+  text-align: center;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  line-height: 44px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.no-bottom {
+  border-bottom: none !important;
+}
+
+button[disabled] {
+  background: $button-disabled-bg-color;
+}
+
+.row-55 {
+  height: 56px;
+  line-height: 56px;
+  background: #fff;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 0 20px;
+}
+
+.row-44 {
+  height: 44px;
+  line-height: 44px;
+
+  .col,
+  span {
+    line-height: inherit;
+    height: inherit;
+  }
+}
+
+.suffix-common {
+  position: absolute;
+  top: 7px;
+  right: 27px;
+  padding: 0px 5px;
+  height: 25px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  line-height: 25px;
+  color: #fff;
+  text-align: center;
+}
+
+.logo-dai {
+  width: 80px;
+  height: 80px;
+  font-size: 50px;
+  line-height: 80px;
+  text-align: center;
+  margin: 30px auto 65px;
+  border-radius: 8px;
+  color: #fff;
+  text-shadow: 0 7px 13px rgba(207, 22, 21, 0.77);
+}
+
+.border-bo-f5 {
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+.font-14 {
+  font-size: 14px;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+.font-20 {
+  font-size: 20px;
+}
+
+.small {
+  font-size: 12px;
+}
+
+.font-30 {
+  font-size: 30px;
+}
+
+.main-margin {
+  margin: 16px;
+}
+.vc-switch {
+  bottom: 100px !important;
+}
