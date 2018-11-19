@@ -12,9 +12,11 @@
   },
   "dependencies": {
     "cross-env": "^5.2.0",
+    "mint-ui": "^2.2.13",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
+    "@nuxtjs/style-resources": "^0.1.1",
     "node-sass": "^4.10.0",
     "nodemon": "^1.11.0",
     "sass-loader": "^7.1.0"
