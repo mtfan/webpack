@@ -1,0 +1,5 @@
+.page-enter,
+.page-leave-active {
+  transition: all 0.3s;
+  transform: translateX(-100%);
+}

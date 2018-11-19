@@ -1,6 +1,5 @@
 module.exports = {
   mode: 'universal',
-
   /*
    ** Headers of the page
    */
@@ -36,6 +35,7 @@ module.exports = {
    ** Global CSS
    */
   css: [
+    'assets/page-transletion.css',
     'mint-ui/lib/style.css',
     { src: '~assets/sass/common/_base.scss', lang: 'scss' }
   ],
