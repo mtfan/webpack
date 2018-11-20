@@ -25,7 +25,10 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     link: [{ rel: 'apple-touch-icon', href: '/favicon.ico' }]
   },
-
+  // 路由拦截器
+  router: {
+    middleware: 'userAuth'
+  },
   /*
    ** Customize the progress-bar color
    */
