@@ -43,7 +43,10 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~plugins/mint-ui', ssr: true }],
+  plugins: [
+    { src: '~plugins/mint-ui', ssr: true },
+    { src: '~/plugins/storage.js', ssr: false }
+  ],
 
   /*
    ** Nuxt.js modules
