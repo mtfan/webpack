@@ -48,7 +48,8 @@ module.exports = {
    */
   plugins: [
     { src: '~plugins/mint-ui', ssr: true },
-    { src: '~/plugins/storage.js', ssr: false }
+    { src: '~/plugins/storage.js', ssr: false },
+    { src: '~/plugins/vconsole.js', ssr: false }
   ],
 
   /*
