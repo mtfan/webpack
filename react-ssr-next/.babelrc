@@ -1,11 +1,27 @@
 {
   "presets": ["next/babel"],
   "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
     [
       "import",
       {
         "libraryName": "antd-mobile",
         "style": "css"
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "reduxs": "./redux",
+          "components": "./components",
+          "pages": "./pages",
+          "api": "./api",
+          "static": "./static",
+          "utils": "./utils"
+        }
       }
     ]
   ]
