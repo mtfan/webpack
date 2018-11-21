@@ -1,19 +1,11 @@
 {
-  "name": "react-ssr-next",
-  "version": "1.0.0",
-  "description": "react-ssr-next",
-  "main": "index.js",
+  "name": "create-next-example-app",
   "scripts": {
-    "dev": "next",
+    "dev": "next -p 4000",
     "build": "next build",
     "start": "next start"
   },
-  "keywords": [],
-  "author": "hulei",
-  "license": "ISC",
   "dependencies": {
-    "antd-mobile": "2.2.5",
-    "axios": "^0.18.0",
     "next": "^7.0.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
@@ -21,8 +13,6 @@
   "devDependencies": {
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
-    "@zeit/next-typescript": "^1.1.1",
-    "babel-plugin-import": "^1.2.1",
     "node-sass": "^4.10.0"
   }
 }

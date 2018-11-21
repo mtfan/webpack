@@ -1,5 +1,6 @@
 import App, { Container } from 'next/app';
 import React from 'react';
+import './../static/sass/common/_base.scss';
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
