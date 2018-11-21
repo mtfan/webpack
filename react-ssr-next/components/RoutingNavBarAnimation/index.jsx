@@ -8,7 +8,6 @@ const RoutingNavBarAnimation = ({ key, title }) => Comp =>
       return (
         <Fragment>
           <NavBar
-            style={{ position: 'relative', zIndex: 999 }}
             mode="light"
             icon={<Icon type="left" />}
             onLeftClick={() => console.log('onLeftClick')}

@@ -2,6 +2,11 @@ import App, { Container } from 'next/app';
 import React from 'react';
 import { withRouter } from 'next/router';
 
+import { Provider } from 'react-redux';
+import storeConfig from '../redux/store';
+const { persistor, store } = storeConfig();
+import { PersistGate } from 'redux-persist/integration/react';
+
 import Home from 'pages/home';
 import Found from 'pages/found';
 import MinePage from 'pages/mine';
@@ -49,8 +54,12 @@ export default class MyApp extends App {
     ];
     return (
       <Container>
-        <Component {...pageProps} />
-        {isTabBar ? <TabBarLink navList={navList} /> : ''}
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Component {...pageProps} />
+            {isTabBar ? <TabBarLink navList={navList} /> : ''}
+          </PersistGate>
+        </Provider>
       </Container>
     );
   }

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import RoutingNavBarAnimation from 'components/RoutingNavBarAnimation';
-@RoutingNavBarAnimation({ key: 'Found', title: '我的' })
-class Found extends Component {
+@RoutingNavBarAnimation({ key: 'Mine', title: '我的' })
+class Mine extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    return <div>Found</div>;
+    return <div>Mine</div>;
   }
 }
 
-export default Found;
+export default Mine;
