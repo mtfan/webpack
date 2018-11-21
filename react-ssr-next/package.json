@@ -8,6 +8,7 @@
   "dependencies": {
     "antd-mobile": "^2.2.6",
     "next": "^7.0.2",
+    "rc-queue-anim": "^1.6.7",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },

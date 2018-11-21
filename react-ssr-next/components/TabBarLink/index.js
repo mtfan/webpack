@@ -1,8 +1,9 @@
+import React, { Component } from 'react';
 import { TabBar } from 'antd-mobile';
 import { withRouter } from 'next/router';
 import './index.scss';
 @withRouter
-class TabBarLink extends React.Component {
+class TabBarLink extends Component {
   render() {
     let { router, navList } = this.props;
     return (
