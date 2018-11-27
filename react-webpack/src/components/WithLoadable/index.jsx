@@ -2,7 +2,6 @@ import React from 'react';
 import Loadable from 'react-loadable';
 
 export default function withLoadable(comp) {
-  debugger;
   return Loadable({
     loader: comp,
     loading: props => {
