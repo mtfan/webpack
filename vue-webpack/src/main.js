@@ -8,7 +8,9 @@ import store from './vuex';
 import 'mint-ui/lib/style.css';
 
 import Vconsole from 'vconsole'
-const vConsole = new Vconsole();
+if (process.env.NODE_ENV != 'production') {
+  new Vconsole();
+}
 
 Vue.use(Mint);
 Vue.config.productionTip = false;

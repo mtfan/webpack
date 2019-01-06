@@ -1,15 +1,18 @@
 {
   "name": "vue-webpack",
   "version": "1.0.0",
-  "description": "",
+  "description": "vue-base",
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors",
+    "build:analy": "cross-env NODE_ENV=production ANALY=true webpack --config ./webpack.production.config.js --progress --colors",
+    "build:log": "cross-env NODE_ENV=development webpack --config ./webpack.production.config.js --progress --colors",
+    "build:log:analy": "cross-env NODE_ENV=development ANALY=true webpack --config ./webpack.production.config.js --progress --colors",
     "dev:dev": "webpack-dev-server --progress --colors --watch --open",
     "dev:mock": "nodemon mock/app.js",
     "dev": "npm-run-all --parallel dev:**"
   },
-  "author": "",
+  "author": "hulei",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.17.1",
@@ -58,6 +61,7 @@
     "webpack": "^4.19.0",
     "webpack-bundle-analyzer": "^2.10.1",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-dev-server": "^3.1.1",
+    "webpack-merge": "^4.2.1"
   }
 }

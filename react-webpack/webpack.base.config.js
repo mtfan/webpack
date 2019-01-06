@@ -1,30 +1,12 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
-const config = {
-  mode: 'development',
-  entry: {
-    main: resolve('src/main.js')
-  },
-  output: {
-    filename: 'bundle.js'
-  },
-  devtool: 'cheap-module-eval-source-map',
-  devServer: {
-    proxy: {
-      '/api': 'http://localhost:7878'
-    },
-    historyApiFallback: true,
-    inline: true,
-    hot: true,
-    port: 8080,
-    overlay: true
-  },
+const base = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss'],
     alias: {
@@ -45,19 +27,35 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader'
+          }
+        ]
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader'
+          }
+        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: 'img/[name].[hash:8].[ext]'
-        }
+        use: [{
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              name: 'img/[name].[hash:8].[ext]'
+            }
+          },
+          'img-loader'
+        ]
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
@@ -78,18 +76,15 @@ const config = {
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[chunkhash:8].css'
+    }),
     new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(
-        JSON.parse(process.env.NODE_ENV == 'dev' || 'false')
-      )
-    }),
-    new HtmlWebpackPlugin({
-      template: resolve('index.html'),
-      favicon: resolve('favicon.ico')
-    }),
-    // 模块热更新
-    new webpack.HotModuleReplacementPlugin()
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
+    })
   ]
 };
 
-module.exports = config;
+module.exports = base;
