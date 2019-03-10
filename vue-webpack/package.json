@@ -11,10 +11,11 @@
     "dev:dev": "webpack-dev-server --progress --colors --watch --open",
     "dev:mock": "nodemon mock/app.js",
     "dev": "npm-run-all --parallel dev:**",
-    "eslint": "eslint ./src --ext .js,.vue",
+		"eslint": "eslint ./src --ext .js,.vue",
+		"precommit-msg": "echo 'pre-commit checks.........' && exit 0",
 		"fix": "eslint --fix ./src --ext .js,.vue"
 	},
-	"pre-commit": ["eslint"],
+	"pre-commit": ["precommit-msg","eslint"],
   "author": "hulei",
   "license": "ISC",
   "dependencies": {
