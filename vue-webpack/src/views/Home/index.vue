@@ -18,7 +18,7 @@ export default {
 		}),
 		...mapActions(['userAction', 'getUserInfo']),
 		submit() {
-			this.homeMutation({ username: 'tom' });
+			this.homeMutation({ username: "tom" });
 			setTimeout(() => {
 				this.getUserInfo({ username: 'hulei' });
 			}, 2000);
