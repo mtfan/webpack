@@ -12,10 +12,8 @@
     "dev:mock": "nodemon mock/app.js",
     "dev": "npm-run-all --parallel dev:**",
 		"eslint": "eslint ./src --ext .js,.vue",
-		"precommit-msg": "echo 'pre-commit checks.........' && exit 0",
 		"fix": "eslint --fix ./src --ext .js,.vue"
 	},
-	"pre-commit": ["precommit-msg","eslint"],
   "author": "hulei",
   "license": "ISC",
   "dependencies": {

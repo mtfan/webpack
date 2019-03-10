@@ -7,7 +7,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-let pre = "testpre-commit";
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 export default {
 	computed: {
@@ -19,7 +18,7 @@ export default {
 		}),
 		...mapActions(['userAction', 'getUserInfo']),
 		submit() {
-			this.homeMutation({ username: "tom" });
+			this.homeMutation({ username: 'tom' });
 			setTimeout(() => {
 				this.getUserInfo({ username: 'hulei' });
 			}, 2000);
