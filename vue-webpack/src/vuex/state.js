@@ -1,7 +1,7 @@
 const state = {
-  user: {
-    username: '张某'
-  }
-}
+	user: {
+		username: '张某'
+	}
+};
 
-export default state
+export default state;

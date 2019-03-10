@@ -9,13 +9,14 @@
  */
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 .row {
   @include display-flex();
+
   width: 100%;
 }
 
@@ -25,29 +26,28 @@
 
 .row-no-padding {
   padding: 0;
-
-  >.col {
+  /* stylelint-disable */
+  > .col {
     padding: 0;
   }
 }
 
-.row+.row {}
-
 .col {
   @include flex(1);
+
   display: block;
   width: 100%;
 }
 
-
 /* Vertically Align Columns */
+
 /* .row-* vertically aligns every .col in the .row */
 .row-top {
   @include align-items(flex-start);
 }
 
 .row-space-between {
-  @include justify-content(space-between)
+  @include justify-content(space-between);
 }
 
 .row-bottom {
@@ -118,84 +118,101 @@
   margin-left: 90%;
 }
 
-
 /* Explicit Column Percent Sizes */
+
 /* By default each grid column will evenly distribute */
+
 /* across the grid. However, you can specify individual */
+
 /* columns to take up a certain size of the available area */
 .col-10 {
   @include flex(0, 0, 10%);
+
   max-width: 10%;
 }
 
 .col-20 {
   @include flex(0, 0, 20%);
+
   max-width: 20%;
 }
 
 .col-25 {
   @include flex(0, 0, 25%);
+
   max-width: 25%;
 }
 
 .col-30 {
   @include flex(0, 0, 30%);
+
   max-width: 30%;
 }
 
 .col-33,
 .col-34 {
   @include flex(0, 0, 33.3333%);
+
   max-width: 33.3333%;
 }
 
 .col-40 {
   @include flex(0, 0, 40%);
+
   max-width: 40%;
 }
 
 .col-42 {
   @include flex(0, 0, 42%);
+
   max-width: 42%;
 }
 
 .col-48 {
   @include flex(0, 0, 48%);
+
   max-width: 48%;
 }
 
 .col-50 {
   @include flex(0, 0, 50%);
+
   max-width: 50%;
 }
 
 .col-60 {
   @include flex(0, 0, 60%);
+
   max-width: 60%;
 }
 
 .col-66,
 .col-67 {
   @include flex(0, 0, 66.6666%);
+
   max-width: 66.6666%;
 }
 
 .col-70 {
   @include flex(0, 0, 70%);
+
   max-width: 70%;
 }
 
 .col-75 {
   @include flex(0, 0, 75%);
+
   max-width: 75%;
 }
 
 .col-80 {
   @include flex(0, 0, 80%);
+
   max-width: 80%;
 }
 
 .col-90 {
   @include flex(0, 0, 90%);
+
   max-width: 90%;
 }

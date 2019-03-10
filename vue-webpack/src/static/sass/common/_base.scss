@@ -6,10 +6,10 @@ $positive-font-color: #666 !default;
 $main-color: #ff6b69;
 $font-size-base: 14px !default;
 $font-family-base: '-apple-system',
-'Helvetica Neue',
-'Roboto',
-'Segoe UI',
-sans-serif !default;
+  'Helvetica Neue',
+  'Roboto',
+  'Segoe UI',
+  sans-serif !default;
 $line-height-computed: 20px !default;
 
 $content-padding: 15px;
@@ -48,6 +48,7 @@ body {
 
 .platform-ios .scroll-content {
   @extend .scroll-content;
+
   padding-top: 65px;
 }
 
@@ -72,8 +73,8 @@ body {
 }
 
 .mid-chunk {
-  background: #F5F5F5;
-  height: 10px
+  background: #f5f5f5;
+  height: 10px;
 }
 
 .suffix-color {
@@ -135,7 +136,6 @@ img {
   cursor: pointer;
 }
 
-
 .no-bottom {
   border-bottom: none !important;
 }
@@ -147,13 +147,12 @@ button[disabled] {
 .row-55 {
   height: 56px;
   line-height: 56px;
-  background: #Fff;
+  background: #fff;
   border-bottom: 1px solid #f1f1f1;
   padding: 0 20px;
 }
 
-.row-44,
-  {
+.row-44 {
   height: 44px;
   line-height: 44px;
 
@@ -168,7 +167,7 @@ button[disabled] {
   position: absolute;
   top: 7px;
   right: 27px;
-  padding: 0px 5px;
+  padding: 0 5px;
   height: 25px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
@@ -224,6 +223,7 @@ button[disabled] {
 .main-margin {
   margin: 16px;
 }
-.vc-switch{
+
+.vc-switch {
   bottom: 100px !important;
 }

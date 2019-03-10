@@ -1,0 +1,29 @@
+{
+	"editor.fontSize": 14,
+	"editor.tabSize": 2,
+	"git.enableSmartCommit": true,
+	// "editor.fontFamily": "Fira Code",
+	"editor.fontLigatures": true,
+	"window.zoomLevel": 0,
+	// "editor.formatOnSave": true,
+	// Prettier
+	"prettier.singleQuote": true,
+	"git.autofetch": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"emmet.includeLanguages": {
+		"vue-html": "html",
+		"javascript": "javascriptreact",
+		"wxml": "html"
+	},
+	"svgviewer.enableautopreview": true,
+	// vetur插件格式化使用beautify内置规则
+	"vetur.format.defaultFormatter.html": "js-beautify-html",
+	"workbench.startupEditor": "newUntitledFile",
+	"files.associations": {
+		"*.cjson": "jsonc",
+		"*.wxss": "css",
+		"*.wxs": "javascript"
+	},
+	"minapp-vscode.disableAutoConfig": true,
+	"javascript.implicitProjectConfig.experimentalDecorators": true
+}

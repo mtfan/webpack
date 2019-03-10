@@ -14,7 +14,7 @@
 
   &.active,
   &.activated {
-    @if $active-border-color !="" {
+    @if $active-border-color !='' {
       border-color: $active-border-color;
     }
 
@@ -23,14 +23,14 @@
   }
 }
 
-@mixin button-clear($color, $font-size:"") {
+@mixin button-clear($color, $font-size:'') {
   &.button-clear {
     border-color: transparent;
     background: none;
     box-shadow: none;
     color: $color;
 
-    @if $font-size !="" {
+    @if $font-size !='' {
       font-size: $font-size;
     }
   }
@@ -41,12 +41,12 @@
   }
 }
 
-@mixin button-outline($color, $text-color:"") {
+@mixin button-outline($color, $text-color:'') {
   &.button-outline {
     border-color: $color;
     background: transparent;
 
-    @if $text-color=="" {
+    @if $text-color=='' {
       $text-color: $color;
     }
 
@@ -60,8 +60,6 @@
     }
   }
 }
-
-
 // Bar Mixins
 // --------------------------------------------------
 
@@ -75,8 +73,6 @@
     color: $color;
   }
 }
-
-
 // Tab Mixins
 // --------------------------------------------------
 
@@ -93,8 +89,6 @@
     color: $color;
   }
 }
-
-
 // Item Mixins
 // --------------------------------------------------
 
@@ -108,13 +102,11 @@
   border-color: $active-border-color;
   background-color: $active-bg-color;
 
-  &.item-complex>.item-content {
+  &.item-complex > .item-content {
     border-color: $active-border-color;
     background-color: $active-bg-color;
   }
 }
-
-
 // Badge Mixins
 // --------------------------------------------------
 
@@ -122,13 +114,11 @@
   background-color: $bg-color;
   color: $color;
 }
-
-
 // Range Mixins
 // --------------------------------------------------
 
 @mixin range-style($track-bg-color) {
-  &::-webkit-slider-thumb:before {
+  &::-webkit-slider-thumb::before {
     background: $track-bg-color;
   }
 
@@ -136,34 +126,28 @@
     background: $track-bg-color;
   }
 }
-
-
 // Checkbox Mixins
 // --------------------------------------------------
-
 @mixin checkbox-style($off-border-color, $on-bg-color, $on-border-color) {
-
-  & input:before,
-  & .checkbox-icon:before {
+  & input::before,
+  & .checkbox-icon::before {
     border-color: $off-border-color;
   }
 
   // what the background looks like when its checked
-  & input:checked:before,
-  & input:checked+.checkbox-icon:before {
+  & input:checked::before,
+  & input:checked + .checkbox-icon::before {
     background: $on-bg-color;
     border-color: $on-border-color;
   }
 }
-
-
 // Toggle Mixins
 // --------------------------------------------------
 
 @mixin toggle-style($on-border-color, $on-bg-color) {
 
   // the track when the toggle is "on"
-  & input:checked+.track {
+  & input:checked + .track {
     border-color: $on-border-color;
     background-color: $on-bg-color;
   }
@@ -172,35 +156,31 @@
 @mixin toggle-small-style($on-bg-color) {
 
   // the track when the toggle is "on"
-  & input:checked+.track {
-    background-color: rgba($on-bg-color, .5);
+  & input:checked + .track {
+    background-color: rgba($on-bg-color, 0.5);
   }
 
-  & input:checked+.track .handle {
+  & input:checked + .track .handle {
     background-color: $on-bg-color;
   }
 }
-
-
 // Clearfix
 // --------------------------------------------------
 
 @mixin clearfix {
   *zoom: 1;
 
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     display: table;
-    content: "";
+    content: '';
     line-height: 0;
   }
 
-  &:after {
+  &::after {
     clear: both;
   }
 }
-
-
 // Placeholder text
 // --------------------------------------------------
 
@@ -213,15 +193,13 @@
   &:-ms-input-placeholder {
     color: $color;
   }
-
+  /* stylelint-disable */
   &::-webkit-input-placeholder {
     color: $color;
     // Safari placeholder margin issue
     text-indent: $text-indent;
   }
 }
-
-
 // Text Mixins
 // --------------------------------------------------
 
@@ -239,8 +217,6 @@
 @mixin touch-callout($value: none) {
   -webkit-touch-callout: $value;
 }
-
-
 // Font Mixins
 // --------------------------------------------------
 
@@ -281,8 +257,6 @@
   -webkit-font-smoothing: $font-smoothing;
   font-smoothing: $font-smoothing;
 }
-
-
 // Appearance
 // --------------------------------------------------
 
@@ -291,16 +265,12 @@
   -moz-appearance: $val;
   appearance: $val;
 }
-
-
 // Border Radius Mixins
 // --------------------------------------------------
-
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
   border-radius: $radius;
 }
-
 // Single Corner Border Radius
 @mixin border-top-left-radius($radius) {
   -webkit-border-top-left-radius: $radius;
@@ -342,20 +312,14 @@
   @include border-top-left-radius($radius);
   @include border-bottom-left-radius($radius);
 }
-
-
 // Box shadows
 // --------------------------------------------------
-
 @mixin box-shadow($shadow...) {
   -webkit-box-shadow: $shadow;
   box-shadow: $shadow;
 }
-
-
 // Transition Mixins
 // --------------------------------------------------
-
 @mixin transition($transition...) {
   -webkit-transition: $transition;
   transition: $transition;
@@ -386,11 +350,8 @@
   -webkit-transition: -webkit-transform $properties;
   transition: transform $properties;
 }
-
-
 // Animation Mixins
 // --------------------------------------------------
-
 @mixin animation($animation) {
   -webkit-animation: $animation;
   animation: $animation;
@@ -425,11 +386,8 @@
   -webkit-animation-iteration-count: $count;
   animation-iteration-count: $count;
 }
-
-
 // Transformation Mixins
 // --------------------------------------------------
-
 @mixin rotate($degrees) {
   @include transform(rotate($degrees));
 }
@@ -444,6 +402,7 @@
 
 @mixin skew($x, $y) {
   @include transform(skew($x, $y));
+
   -webkit-backface-visibility: hidden;
 }
 
@@ -464,8 +423,6 @@
   -webkit-transform-origin: $left $top;
   transform-origin: $left $top;
 }
-
-
 // Backface visibility
 // --------------------------------------------------
 // Prevent browsers from flickering when using CSS 3D transforms.
@@ -475,50 +432,35 @@
   -webkit-backface-visibility: $visibility;
   backface-visibility: $visibility;
 }
-
-
 // Background clipping
 // --------------------------------------------------
-
 @mixin background-clip($clip) {
   -webkit-background-clip: $clip;
   background-clip: $clip;
 }
-
-
 // Background sizing
 // --------------------------------------------------
-
 @mixin background-size($size) {
   -webkit-background-size: $size;
   background-size: $size;
 }
-
-
 // Box sizing
 // --------------------------------------------------
-
 @mixin box-sizing($boxmodel) {
   -webkit-box-sizing: $boxmodel;
   -moz-box-sizing: $boxmodel;
   box-sizing: $boxmodel;
 }
-
-
 // User select
 // --------------------------------------------------
-
 @mixin user-select($select) {
   -webkit-user-select: $select;
   -moz-user-select: $select;
   -ms-user-select: $select;
   user-select: $select;
 }
-
-
 // Content Columns
 // --------------------------------------------------
-
 @mixin content-columns($columnCount, $columnGap: $grid-gutter-width) {
   -webkit-column-count: $columnCount;
   -moz-column-count: $columnCount;
@@ -527,13 +469,10 @@
   -moz-column-gap: $columnGap;
   column-gap: $columnGap;
 }
-
-
 // Flexbox Mixins
 // --------------------------------------------------
 // http://philipwalton.github.io/solved-by-flexbox/
 // https://github.com/philipwalton/solved-by-flexbox
-
 @mixin display-flex {
   display: -webkit-box;
   display: -webkit-flex;

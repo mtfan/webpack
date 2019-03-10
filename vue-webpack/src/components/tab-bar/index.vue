@@ -26,13 +26,13 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default {
-    data() {
-      return {
-        selected: 'selected_home'
-      };
-    }
-  };
+export default {
+	data() {
+		return {
+			selected: 'selected_home'
+		};
+	}
+};
 </script>
 
 <style lang="scss">

@@ -11,13 +11,13 @@
 </template>
 
 <script>
-  import TabBar from "components/tab-bar";
+import TabBar from 'components/tab-bar';
 
-  export default {
-    components: {
-      TabBar
-    }
-  };
+export default {
+	components: {
+		TabBar
+	}
+};
 </script>
 <style scoped>
   /*淡入淡出*/

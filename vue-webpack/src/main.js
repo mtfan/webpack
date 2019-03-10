@@ -7,9 +7,10 @@ import router from './router';
 import store from './vuex';
 import 'mint-ui/lib/style.css';
 
-import Vconsole from 'vconsole'
+import Vconsole from 'vconsole';
+// eslint-disable-next-line no-undef
 if (process.env.NODE_ENV != 'production') {
-  new Vconsole();
+	new Vconsole();
 }
 
 Vue.use(Mint);
@@ -20,11 +21,11 @@ fastclick.attach(document.body);
 import 'static/sass/common/_base';
 
 new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<App/>',
-  components: {
-    App
-  }
+	el: '#app',
+	router,
+	store,
+	template: '<App/>',
+	components: {
+		App
+	}
 });
