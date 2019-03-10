@@ -7,7 +7,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-let pre = "test pre-commit";
+let pre = "testpre-commit";
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 export default {
 	computed: {
