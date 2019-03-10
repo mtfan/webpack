@@ -7,9 +7,9 @@ import router from './router';
 import store from './vuex';
 import 'mint-ui/lib/style.css';
 
-import Vconsole from 'vconsole';
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV != 'production') {
+	const Vconsole = require('vconsole');
 	new Vconsole();
 }
 
