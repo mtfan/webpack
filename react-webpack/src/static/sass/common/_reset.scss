@@ -485,3 +485,7 @@ html {
   -ms-touch-action: pan-y;
   touch-action: pan-y;
 }
+// 添加全局样式消除img被插件的影响
+img {
+  content: normal !important;
+}

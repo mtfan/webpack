@@ -24,7 +24,7 @@ const config = merge(base, {
     historyApiFallback: true,
     inline: true,
     hot: true,
-    port: 8080,
+    port: 9999,
     overlay: true
   },
   plugins: [

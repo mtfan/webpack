@@ -5,7 +5,7 @@
 	// "editor.fontFamily": "Fira Code",
 	"editor.fontLigatures": true,
 	"window.zoomLevel": 0,
-	// "editor.formatOnSave": true,
+	"editor.formatOnSave": true,
 	// Prettier
 	"prettier.singleQuote": true,
 	"git.autofetch": true,
