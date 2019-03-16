@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import RoutingNavBarAnimation from 'components/RoutingNavBarAnimation';
 import { userAction, getUserInfo } from 'reduxs/action';
+import Alert from 'components/Alert';
 
 @connect(
   state => state.user,
@@ -18,8 +19,12 @@ class Home extends Component {
   componentDidMount() {}
 
   handel() {
+    let alert = Alert.open({
+      alertTip: '全局组件测试'
+    });
     this.props.userAction({ username: '王五' });
     setTimeout(() => {
+      alert.destroy();
       this.props.getUserInfo();
     }, 3000);
   }
