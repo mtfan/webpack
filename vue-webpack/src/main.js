@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import fastclick from 'fastclick';
 import Mint from 'mint-ui';
-
+import Toast from './plugins';
 import App from './App.vue';
 import router from './router';
 import store from './vuex';
@@ -14,6 +14,7 @@ if (process.env.NODE_ENV != 'production') {
 }
 
 Vue.use(Mint);
+Vue.use(Toast);
 Vue.config.productionTip = false;
 
 fastclick.attach(document.body);

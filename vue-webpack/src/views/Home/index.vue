@@ -1,8 +1,11 @@
 <template>
-<div>
-  <div>{{this.user.username}}</div>
-  <mt-button type="primary" @click="submit">提交vuex</mt-button>
-</div>
+  <div>
+    <div>{{this.user.username}}</div>
+    <mt-button
+      type="primary"
+      @click="submit"
+    >提交vuex</mt-button>
+  </div>
 
 </template>
 
@@ -10,20 +13,51 @@
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 export default {
 	computed: {
-		...mapGetters(['user'])
+		...mapGetters(
+			[
+				'user',
+			],
+		),
 	},
 	methods: {
-		...mapMutations({
-			homeMutation: 'USER'
-		}),
-		...mapActions(['userAction', 'getUserInfo']),
+		...mapMutations(
+			{
+				homeMutation:
+					'USER',
+			},
+		),
+		...mapActions(
+			[
+				'userAction',
+				'getUserInfo',
+			],
+		),
 		submit() {
-			this.homeMutation({ username: 'tom' });
-			setTimeout(() => {
-				this.getUserInfo({ username: 'hulei' });
-			}, 2000);
-		}
-	}
+			this.homeMutation(
+				{
+					username:
+						'tom',
+				},
+			);
+			this.$Toast.open(
+				{
+					toastTip:
+						'全局组件测试',
+				},
+			);
+			setTimeout(
+				() => {
+					this.getUserInfo(
+						{
+							username:
+								'hulei',
+						},
+					);
+				},
+				2000,
+			);
+		},
+	},
 };
 </script>
 
