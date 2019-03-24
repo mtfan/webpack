@@ -7,11 +7,11 @@
         <div class="hy-picker-popup-header-right">确定</div>
       </div>
       <div class="hy-picker">
-        <div class="hy-picker-col" @touchstart.stop.prevent="touchstart" @touchmove.stop.prevent="touchmove" @touchend.stop.prevent="touchend" v-for="(arr,index) in list" :key="index">
+        <div class="hy-picker-col" @touchstart.stop.prevent="touchstart" @touchmove.stop.prevent="touchmove" @touchend.stop.prevent="touchend" v-for="(arr,index) in data" :key="index">
           <div class="hy-picker-col-mask" style="width: 100%">{{index}}</div>
           <div class="hy-picker-col-indicator" style="width: 100%">{{index}}</div>
           <div class="hy-picker-col-content" :style="{width:'100%',transition:'all .3s linear',transform: 'translateY(' + y[index] + 'px)'}">
-            <div class="hy-picker-col-content-item" v-for="(item,index) in arr" :key="index">{{item}}</div>
+            <div class="hy-picker-col-content-item" v-for="(item,index) in arr" :key="index">{{item.label}}</div>
           </div>
         </div>
       </div>
@@ -20,58 +20,114 @@
 </template>
 
 <script>
+const SPACE = 34;
 export default {
+	props: {
+		list: {
+			type: Array,
+			default: () => []
+		},
+		type: {
+			type: Number,// 默认为日期类型
+			default: 1
+		},
+		startYears: {
+			type: [Number, String],
+			default: 2000
+
+		},
+		endYears: {
+			type: [Number, String],
+			default: 2019
+
+		}
+	},
 	data () {
 		return {
+			data: this.list,
 			index: 0,
 			startY: [],
 			y: [],
-			list: [[], [], []],
-			listItemTotal: [],
+			values: []
 		};
 	},
 	created () {
-		this.test();
+		this.init();
 	},
 	methods: {
-		test () {
-			for (let index = 0; index < 10; index++) {
-				this.list[0].push(index);
-				this.list[1].push(index);
-				this.list[2].push(index);
+		init () {
+			if (this.type === 1) {
+				for (let index = this.startYears; index <= this.endYears; index++) {
+					if (!this.data[0]) {
+						this.data[0] = [];
+					}
+					this.data[0].push({ label: `${index}年`, value: index, });
+				}
+				for (let index = 1; index <= 12; index++) {
+					if (!this.data[1]) {
+						this.data[1] = [];
+					}
+					this.data[1].push({ label: `${index}月`, value: index, });
+				}
 			}
-			this.list[0].push(10);
-			this.list[0].push(11);
-			this.list[1].push(10);
-			this.listItemTotal.push(this.list[0].length - 1);
-			this.listItemTotal.push(this.list[1].length - 1);
-			this.listItemTotal.push(this.list[2].length - 1);
+			this.data.forEach(item => {
+				this.values.push(item[0]);
+				this.y.push(0);
+				this.startY.push(0);
+			});
+
+			if (this.type === 1) {
+				this.getDays(this.values[0].value, this.values[1].value);
+			}
+		},
+		getDays (y, m) {
+			for (let index = 1; index <= new Date(y, m, 0).getDate(); index++) {
+				if (!this.data[2]) {
+					this.data[2] = [];
+				}
+				this.data[2].push({ label: `${index}日`, value: index, });
+			}
+			let max = (this.data[2].length - 1) * SPACE;
+			if (Math.abs(this.y[2]) > max) {
+				this.y.splice(2, 1, -max);
+				this.values[2] = this.data[2][this.data[2].length - 1];
+
+			} else if (!this.values[2]) {
+				this.values[2] = this.data[2][0];
+			}
 		},
 		touchstart (e) {
 			this.index = +e.target.innerHTML;
-			this.onArrChangeHandler(this.startY, e.targetTouches[0].pageY - (this.y[this.index] || 0));
+			this.startY[this.index] = e.targetTouches[0].pageY - (this.y[this.index] || 0);
 		},
 		touchmove (e) {
 			this.onArrChangeHandler(this.y, e.targetTouches[0].pageY - this.startY[this.index]);
 		},
 		touchend () {
 			let y = this.y[this.index];
+			let index = this.index;
+			let dataItemArr = this.data[this.index];
+			let max = (dataItemArr.length - 1) * SPACE;
 			if (y > 0) {
 				this.onArrChangeHandler(this.y, 0);
-				return;
-			}
-			let max = this.listItemTotal[this.index] * 34;
-			if (Math.abs(y) > max) {
+				this.values[index] = dataItemArr[0];
+			} else if (Math.abs(y) > max) {
 				this.onArrChangeHandler(this.y, -max);
-				return;
+				this.values[index] = dataItemArr[dataItemArr.length - 1];
+			} else {
+				this.onArrChangeHandler(this.y, (Math.ceil(y / SPACE) * SPACE));
+				this.values[index] = dataItemArr[Math.abs(Math.ceil(y / SPACE))];
 			}
-			this.onArrChangeHandler(this.y, (Math.ceil(y / 34) * 34));
 			// eslint-disable-next-line no-console
-			console.log(this.list[this.index][Math.abs(Math.ceil(y / 34))]);
+			console.log(this.values);
+			if (this.type === 1 && (index === 0 || index === 1)) {
+				this.data.splice(2, 1, []);
+				this.getDays(this.values[0].value, this.values[1].value);
+			}
 		},
 		onArrChangeHandler (arr, value) {
 			arr.splice(this.index, 1, value);
-		}
+		},
 	}
 };
 </script>
