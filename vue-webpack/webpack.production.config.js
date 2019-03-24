@@ -17,11 +17,11 @@ const config = merge(base, {
 	mode: 'production',
 	entry: {
 		main: resolve('src/main.js'),
-		vendor: Object.keys(pkg.dependencies)
+		vendor: Object.keys(pkg.dependencies),
 	},
 	output: {
 		path: resolve('build'),
-		filename: 'js/[name].[chunkhash:8].js'
+		filename: 'js/[name].[chunkhash:8].js',
 	},
 	// devtool: 'cheap-module-source-map',
 	plugins: [
@@ -34,34 +34,34 @@ const config = merge(base, {
 				default: {
 					minChunks: 2,
 					priority: -20,
-					reuseExistingChunk: true
+					reuseExistingChunk: true,
 				},
 				commons: {
 					chunks: 'initial',
 					minChunks: 2,
 					maxInitialRequests: 5,
 					minSize: 0,
-					name: 'commons'
+					name: 'commons',
 				},
 				//打包第三方类库
 				vendor: {
 					chunks: 'initial',
 					name: 'vendor',
-					minChunks: Infinity
-				}
-			}
+					minChunks: Infinity,
+				},
+			},
 		}),
 		new webpack.optimize.RuntimeChunkPlugin({
-			name: 'manifest'
+			name: 'manifest',
 		}),
 		new OptimizeCssAssetsPlugin({
 			cssProcessor: require('cssnano'),
 			cssProcessorOptions: {
 				discardComments: {
-					removeAll: true
-				}
+					removeAll: true,
+				},
 			},
-			canPrint: true
+			canPrint: true,
 		}),
 		new HtmlWebpackPlugin({
 			template: resolve('index.html'),
@@ -71,14 +71,12 @@ const config = merge(base, {
 				caseSensitive: false,
 				removeComments: true,
 				removeEmptyAttributes: true,
-				collapseWhitespace: true
-			}
-		})
-	]
+				collapseWhitespace: true,
+			},
+		}),
+	],
 });
 if (process.env.ANALY) {
-	config.plugins.push(
-		new BundleAnalyzerPlugin()
-	);
+	config.plugins.push(new BundleAnalyzerPlugin());
 }
 module.exports = config;

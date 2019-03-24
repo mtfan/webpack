@@ -1,17 +1,19 @@
 <template>
   <div>
     <div>{{this.user.username}}</div>
-    <mt-button
-      type="primary"
-      @click="submit"
-    >提交vuex</mt-button>
+    <mt-button type="primary" @click="submit">提交vuex</mt-button>
+    <date-picker />
   </div>
 
 </template>
 
 <script type="text/ecmascript-6">
 import { mapGetters, mapMutations, mapActions } from 'vuex';
+import DatePicker from 'components/date-picker';
 export default {
+	components: {
+		DatePicker
+	},
 	computed: {
 		...mapGetters(
 			[
@@ -23,7 +25,7 @@ export default {
 		...mapMutations(
 			{
 				homeMutation:
-					'USER',
+          'USER',
 			},
 		),
 		...mapActions(
@@ -32,17 +34,17 @@ export default {
 				'getUserInfo',
 			],
 		),
-		submit() {
+		submit () {
 			this.homeMutation(
 				{
 					username:
-						'tom',
+            'tom',
 				},
 			);
 			this.$Toast.open(
 				{
 					toastTip:
-						'全局组件测试',
+            '全局组件测试',
 				},
 			);
 			setTimeout(
@@ -50,7 +52,7 @@ export default {
 					this.getUserInfo(
 						{
 							username:
-								'hulei',
+                'hulei',
 						},
 					);
 				},
