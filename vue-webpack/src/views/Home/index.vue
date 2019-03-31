@@ -12,7 +12,7 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 import DatePicker from 'components/date-picker';
 export default {
 	components: {
-		DatePicker
+		DatePicker,
 	},
 	computed: {
 		...mapGetters(
