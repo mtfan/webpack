@@ -1,10 +1,10 @@
 <template>
-  <div class="hy-date-picker-mask">
-    <div class="hy-date-picker-popup">
+  <div class="hy-date-picker-mask" v-if="isPickershow">
+    <div class="hy-date-picker-popup" :class="[show?'picker-animate-in':'picker-animate-out']">
       <div class="hy-picker-popup-header">
-        <div class="hy-picker-popup-header-left">取消</div>
-        <div class="hy-picker-popup-header-title">请选择日期</div>
-        <div class="hy-picker-popup-header-right">确定</div>
+        <div class="hy-picker-popup-header-left" @click="onPickerHandler">取消</div>
+        <div class="hy-picker-popup-header-title">{{title}}</div>
+        <div class="hy-picker-popup-header-right" @click="onPickerHandler">确定</div>
       </div>
       <div class="hy-picker">
         <div class="hy-picker-col" @touchstart.stop.prevent="touchstart" @touchmove.stop.prevent="touchmove" @touchend.stop.prevent="touchend" v-for="(arr,index) in data" :key="index">
@@ -23,6 +23,15 @@
 const SPACE = 34;
 export default {
 	props: {
+		value: {
+			type: Array
+		},
+		isPickershow: {
+			type: Boolean
+		},
+		title: {
+			type: String
+		},
 		list: {
 			type: Array,
 			default: () => []
@@ -33,22 +42,23 @@ export default {
 		},
 		startYears: {
 			type: [Number, String],
-			default: 2000
+			default: 1960
 
 		},
 		endYears: {
 			type: [Number, String],
-			default: 2019
+			default: 2200
 
 		}
 	},
 	data () {
 		return {
+			show: true,
 			data: this.list,
 			index: 0,
 			startY: [],
 			y: [],
-			values: []
+			values: this.value,
 		};
 	},
 	created () {
@@ -110,24 +120,30 @@ export default {
 			let max = (dataItemArr.length - 1) * SPACE;
 			if (y > 0) {
 				this.onArrChangeHandler(this.y, 0);
-				this.values[index] = dataItemArr[0];
+				this.onArrChangeHandler(this.values, dataItemArr[0]);
 			} else if (Math.abs(y) > max) {
 				this.onArrChangeHandler(this.y, -max);
-				this.values[index] = dataItemArr[dataItemArr.length - 1];
+				this.onArrChangeHandler(this.values, dataItemArr[dataItemArr.length - 1]);
 			} else {
 				this.onArrChangeHandler(this.y, (Math.ceil(y / SPACE) * SPACE));
-				this.values[index] = dataItemArr[Math.abs(Math.ceil(y / SPACE))];
+				this.onArrChangeHandler(this.values, dataItemArr[Math.abs(Math.ceil(y / SPACE))]);
 			}
-			// eslint-disable-next-line no-console
-			console.log(this.values);
 			if (this.type === 1 && (index === 0 || index === 1)) {
 				this.data.splice(2, 1, []);
 				this.getDays(this.values[0].value, this.values[1].value);
 			}
+
 		},
 		onArrChangeHandler (arr, value) {
 			arr.splice(this.index, 1, value);
 		},
+		onPickerHandler () {
+			this.show = false;
+			setTimeout(() => {
+				this.$emit('onPickerHandler');
+				this.show = true;
+			}, 0.3 * 1000);
+		}
 	}
 };
 </script>
@@ -215,6 +231,30 @@ export default {
 		height: 34px;
 		line-height: 34px;
 		text-align: center;
+	}
+}
+.picker-animate-in {
+	animation: in 0.3s ease;
+	animation-fill-mode: forwards;
+}
+@keyframes in {
+	0% {
+		transform: translate3d(0, 100%, 0);
+	}
+	100% {
+		transform: translate3d(0, 0, 0);
+	}
+}
+.picker-animate-out {
+	animation: out 0.3s ease;
+	animation-fill-mode: forwards;
+}
+@keyframes out {
+	0% {
+		transform: translate3d(0, 0, 0);
+	}
+	100% {
+		transform: translate3d(0, 100%, 0);
 	}
 }
 </style>
