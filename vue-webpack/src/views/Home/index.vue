@@ -5,6 +5,7 @@
     <mt-button type="primary" @click="onPickerHandler">picker</mt-button>
     <date-picker v-model="picker" :isPickershow="isPickershow" @onPickerHandler="isPickershow=!isPickershow" />
     {{picker}}
+    <dialog-drag @onDragHandler="onDragHandler" />
   </div>
 
 </template>
@@ -12,6 +13,7 @@
 <script type="text/ecmascript-6">
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 import DatePicker from 'components/date-picker';
+import DialogDrag from 'components/dialog-drag';
 export default {
 	data () {
 		return {
@@ -21,6 +23,7 @@ export default {
 	},
 	components: {
 		DatePicker,
+		DialogDrag,
 	},
 	computed: {
 		...mapGetters(['user']),
@@ -44,6 +47,9 @@ export default {
 		},
 		onPickerHandler () {
 			this.isPickershow = !this.isPickershow;
+		},
+		onDragHandler () {
+			console.log('onDragHandler');
 		}
 	},
 };

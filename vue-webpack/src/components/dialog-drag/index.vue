@@ -1,8 +1,20 @@
 <template>
-  <div class="dialog-drag" @touchstart.prevent="touchstart" @touchmove.stop.prevent="touchmove" @click.stop.prevent="onHandler" :style="{left:x+'px',top:y+'px'}"></div>
+  <div class="hy-dialog-drag" @touchstart.prevent="touchstart" @touchmove.stop.prevent="touchmove" @click.stop.prevent="onDragHandler" :style="{left:x+'px',top:y+'px'}">
+    <slot></slot>
+  </div>
 </template>
 <script>
 export default {
+	props: {
+		bottomSistance: {// 初始位置与视口底部的距离
+			type: Number,
+			default: 50
+		},
+		rightSistance: {// 初始位置与视口右边的距离
+			type: Number,
+			default: 20
+		}
+	},
 	data () {
 		return {
 			clientWidth: document.documentElement.clientWidth,
@@ -18,11 +30,11 @@ export default {
 		};
 	},
 	mounted () {
-		let $dom = document.querySelector('.dialog-drag');
+		let $dom = document.querySelector('.hy-dialog-drag');
 		this.boxWidth = $dom.offsetWidth;
 		this.boxHeight = $dom.offsetHeight;
-		this.x = this.clientWidth - this.boxWidth - 10;
-		this.y = this.clientHeight - this.boxHeight - 10;
+		this.x = this.clientWidth - this.boxWidth - this.rightSistance;
+		this.y = this.clientHeight - this.boxHeight - this.bottomSistance;
 		this.maxX = this.clientWidth - this.boxWidth;
 		this.maxY = this.clientHeight - this.boxHeight;
 	},
@@ -44,19 +56,18 @@ export default {
 			} else if (this.y >= this.maxY) {
 				this.y = this.maxY;
 			}
-			e.preventDefault();
 		},
-		onHandler () {
-			console.log('onHandler');
+		onDragHandler () {
+			this.$emit('onDragHandler');
 		}
 	}
 };
 </script>
-<style  lang="scss" scoped>
-.dialog-drag {
+<style  lang="scss">
+.hy-dialog-drag {
 	position: fixed;
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
 	background: red;
 	z-index: 1000;
 }
