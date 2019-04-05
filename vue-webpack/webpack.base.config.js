@@ -5,7 +5,6 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 function resolve(dir) {
 	return path.join(__dirname, dir);
 }
-
 const base = {
 	resolve: {
 		extensions: ['.js', '.vue', '.css', '.scss'],
@@ -77,28 +76,46 @@ const base = {
 if (process.env.NODE_ENV === 'development') {
 	base.module.rules.push({
 		test: /\.scss|.css$/,
-		use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader'],
+		use: [
+			'style-loader',
+			'css-loader',
+			'postcss-loader',
+			'sass-loader',
+			{
+				loader: 'sass-resources-loader',
+				options: {
+					resources: [resolve('src/static/sass/common/_base.scss')],
+				},
+			},
+		],
 	});
 } else {
-	base.module.rules.push({
-		test: /\.css$/,
-		use: [
-			MiniCssExtractPlugin.loader,
-			'css-loader',
-			{
-				loader: 'postcss-loader',
-			},
-		],
-	});
-	base.module.rules.push({
-		test: /\.scss$/,
-		use: [
-			MiniCssExtractPlugin.loader,
-			'css-loader',
-			{
-				loader: 'postcss-loader',
-			},
-		],
-	});
+	base.module.rules.push(
+		{
+			test: /\.css$/,
+			use: [
+				MiniCssExtractPlugin.loader,
+				'css-loader',
+				{
+					loader: 'postcss-loader',
+				},
+			],
+		},
+		{
+			test: /\.scss$/,
+			use: [
+				MiniCssExtractPlugin.loader,
+				'css-loader',
+				'postcss-loader',
+				'sass-loader',
+				{
+					loader: 'sass-resources-loader',
+					options: {
+						resources: [resolve('src/static/sass/common/_base.scss')],
+					},
+				},
+			],
+		},
+	);
 }
 module.exports = base;

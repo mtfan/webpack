@@ -24,6 +24,7 @@ const config = merge(base, {
 		},
 		historyApiFallback: true,
 		inline: true,
+		host: '0.0.0.0',
 		hot: true,
 		port: 8080,
 		overlay: true,

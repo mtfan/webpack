@@ -228,6 +228,7 @@ export default {
 		}
 		.hy-picker-col-content-item {
 			height: 34px;
+			font-size: 18px;
 			line-height: 34px;
 			text-align: center;
 		}
