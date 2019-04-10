@@ -7,6 +7,7 @@
     {{picker}}
     <dialog-drag @onDragHandler="onDragHandler" />
     <swiper :autoplay="true" :dots="true" :autoplayInterval="3000" :data="list"></swiper>
+    <loading :isLoading='isLoading'></loading>
   </div>
 </template>
 
@@ -15,9 +16,11 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 import DatePicker from 'components/date-picker';
 import DialogDrag from 'components/dialog-drag';
 import Swiper from 'components/swiper';
+import Loading from 'components/loading';
 export default {
 	data () {
 		return {
+			isLoading: false,
 			list: [require('./img/001.jpg'), require('./img/002.jpg'), require('./img/003.jpg')],
 			isPickershow: false,
 			picker: []
@@ -27,6 +30,15 @@ export default {
 		DatePicker,
 		DialogDrag,
 		Swiper,
+		Loading
+	},
+	created () {
+		setTimeout(() => {
+			this.isLoading = true;
+		}, 3000);
+		setTimeout(() => {
+			this.isLoading = false;
+		}, 6000);
 	},
 	computed: {
 		...mapGetters(['user']),
