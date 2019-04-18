@@ -147,7 +147,7 @@ export default {
 	}
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .hy-date-picker-mask {
 	width: 100%;
 	height: 100%;

@@ -63,7 +63,7 @@ export default {
 	}
 };
 </script>
-<style  lang="scss">
+<style  lang="scss" scoped>
 .hy-dialog-drag {
 	position: fixed;
 	width: 80px;

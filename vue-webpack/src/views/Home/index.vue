@@ -6,8 +6,14 @@
     <date-picker v-model="picker" :isPickershow="isPickershow" @onPickerHandler="isPickershow=!isPickershow" />
     {{picker}}
     <dialog-drag @onDragHandler="onDragHandler" />
-    <swiper :autoplay="true" :dots="true" :autoplayInterval="3000" :data="list"></swiper>
     <loading :isLoading='isLoading'></loading>
+    <swiper :data="list" @swiperOnClickHandler="swiperOnClickHandler"></swiper>
+    <swiper ref="swiper" @swiperOnChangeHandler="swiperOnChangeHandler" :loop="false" :autoplay="false" :dots="true" :autoplayInterval="3000" :data="list">
+      <li v-for="(item,i) in list" :key="i" @click.stop.prevent="swiperOnClickHandler(item)">
+        <img :src="item.imgUrl">
+      </li>
+    </swiper>
+    <mt-button clsss="button" type="primary" :class="[currentIndex==index?'active':'']" v-for="(item,index) in list" :key="index" @click="tabOnClickHandler(index)">00000{{index}}</mt-button>
   </div>
 </template>
 
@@ -21,9 +27,10 @@ export default {
 	data () {
 		return {
 			isLoading: false,
-			list: [require('./img/001.jpg'), require('./img/002.jpg'), require('./img/003.jpg')],
 			isPickershow: false,
-			picker: []
+			picker: [],
+			currentIndex: 0,
+			list: [{ imgUrl: require('./img/001.jpg') }, { imgUrl: require('./img/002.jpg') }, { imgUrl: require('./img/003.jpg') }],
 		};
 	},
 	components: {
@@ -65,10 +72,22 @@ export default {
 		},
 		onPickerHandler () {
 			this.isPickershow = !this.isPickershow;
+		},
+		swiperOnClickHandler (item) {
+			console.log(item);
+		},
+		swiperOnChangeHandler (i) {
+			this.currentIndex = i;
+		},
+		tabOnClickHandler (i) {
+			this.$refs.swiper.tabOnClickHandler(true, i);
 		}
 	},
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.active {
+	color: aquamarine;
+}
 </style>

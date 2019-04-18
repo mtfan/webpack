@@ -27,7 +27,7 @@
 
 <script type="text/ecmascript-6">
 export default {
-	data() {
+	data () {
 		return {
 			selected: 'selected_home'
 		};
@@ -36,22 +36,22 @@ export default {
 </script>
 
 <style lang="scss">
-  .router-item {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
+.router-item {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+}
 
-  .tab-bar-icon {
-    width: 24px;
-    height: 24px;
-    margin-bottom: 5px;
-  }
+.tab-bar-icon {
+	width: 24px;
+	height: 24px;
+	margin-bottom: 5px;
+}
 
-  .router-link-active {
-    color: rgb(254, 84, 109);
-  }
+.router-link-active {
+	color: rgb(254, 84, 109);
+}
 </style>

@@ -35,8 +35,7 @@ export default {
 	},
 };
 </script>
-
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .pull-content {
 	width: 58px;
 	height: 58px;

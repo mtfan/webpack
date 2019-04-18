@@ -1,26 +1,23 @@
 <template>
-  <div
-    v-if="toastStatus"
-    @click="close"
-  >{{toastTip}}</div>
+  <div v-if="toastStatus" @click="close">{{toastTip}}</div>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
-	data() {
+	data () {
 		return {
 			toastStatus: false,
 			toastTip:
-				'',
+        '',
 		};
 	},
 	methods: {
-		close() {
+		close () {
 			this.toastStatus = false;
 		},
 	},
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 </style>
