@@ -1,16 +1,16 @@
 <template>
-  <div class="hy-swiper">
-    <ul ref="swiper" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend" :style="{'width':clientWidth*list.length+'px','transform':'translate3d('+x+'px,0,0)'}">
-      <slot>
-        <li v-for="(item,i) in list" :key="i" @click.stop.prevent="swiperOnClickHandler(item)">
-          <img :src="item.imgUrl">
-        </li>
-      </slot>
-    </ul>
-    <ol v-if="dots">
-      <li v-for="(item,i) in data" :key="i" :class="[n-1==i?'active':'']"></li>
-    </ol>
-  </div>
+	<div class="hy-swiper" :style="{'width':clientWidth+'px'}">
+		<ul ref="swiper" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend" :style="{'width':clientWidth*list.length+'px','transform':'translate3d('+x+'px,0,0)'}">
+			<slot>
+				<li v-for="(item,i) in list" :key="i" @click.stop.prevent="swiperOnClickHandler(item,i)">
+					<img :src="item.imageUrl">
+				</li>
+			</slot>
+		</ul>
+		<ol v-if="dots">
+			<li v-for="(item,i) in data" :key="i" :class="[n-1==i?'active':'']"></li>
+		</ol>
+	</div>
 </template>
 <script>
 export default {
@@ -42,6 +42,9 @@ export default {
 	},
 	data () {
 		return {
+			direction: '',
+			domCurrentX: '',
+			domCurrentY: '',
 			startX: 0,
 			x: 0,
 			n: 1,
@@ -67,20 +70,36 @@ export default {
 			this.autoplays = false;
 		}
 		this.$nextTick(() => {
-			Array.from(this.$refs.swiper.children).forEach(el => {
-				el.style.width = `${this.clientWidth}px`;
-			});
+			if (this.$refs.swiper) {
+				Array.from(this.$refs.swiper.children).forEach(el => {
+					el.style.width = `${this.clientWidth}px`;
+				});
+			}
 		});
 	},
 	methods: {
 		touchstart (e) {
+			this.direction = '';
 			clearInterval(this.timer);
 			this.autoplays = true;
 			this.$refs.swiper.style.transition = 'none';
 			this.startX = e.targetTouches[0].pageX - this.x;
+			this.domCurrentX = e.targetTouches[0].pageX;
+			this.domCurrentY = e.targetTouches[0].pageY;
 		},
 		touchmove (e) {
-			this.x = e.targetTouches[0].pageX - this.startX;
+			if (this.direction == '') {
+				if (Math.abs(e.targetTouches[0].pageX - this.domCurrentX) > 5) {
+					this.direction = 'x';
+				} else if (Math.abs(e.targetTouches[0].pageY - this.domCurrentY) > 5) {
+					this.direction = 'y';
+				}
+
+			} else {
+				if (this.direction == 'x') {
+					this.x = e.targetTouches[0].pageX - this.startX;
+				}
+			}
 		},
 		touchend () {
 			if (this.list.length === 1) {
@@ -99,16 +118,16 @@ export default {
 		},
 		boundsHandler () {
 			if (this.n >= this.list.length - 1) {
+				this.n = 1;
 				setTimeout(() => {
-					this.n = 1;
 					this.$refs.swiper.style.transition = 'none';
 					this.x = -this.clientWidth;
 				}, 300);
 			}
 
 			if (this.n <= 0) {
+				this.n = this.list.length - 2;
 				setTimeout(() => {
-					this.n = this.list.length - 2;
 					this.$refs.swiper.style.transition = 'none';
 					this.x = -(this.n * this.clientWidth);
 				}, 300);
@@ -148,8 +167,8 @@ export default {
 			}
 			this.swiperOnChangeHandler(this.n - 1);
 		},
-		swiperOnClickHandler (item) {
-			this.$emit('swiperOnClickHandler', item);
+		swiperOnClickHandler (item, index) {
+			this.$emit('swiperOnClickHandler', item, index);
 		},
 		swiperOnChangeHandler (index) {
 			this.$emit('swiperOnChangeHandler', index);
@@ -177,13 +196,13 @@ export default {
 		bottom: 0px;
 		li {
 			width: 10px;
-			height: 10px;
-			border-radius: 50%;
+			height: 6px;
 			display: inline-block;
 			background: rgba(0, 0, 0, 0.1);
 			margin: 5px;
 		}
 		.active {
+			width: 30px;
 			background: #ffffff;
 		}
 	}
