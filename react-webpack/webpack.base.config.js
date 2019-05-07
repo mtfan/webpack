@@ -26,26 +26,6 @@ const base = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'postcss-loader'
-          }
-        ]
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'postcss-loader'
-          }
-        ]
-      },
-      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         use: [{
             loader: 'url-loader',
@@ -86,5 +66,49 @@ const base = {
     })
   ]
 };
-
+if (process.env.NODE_ENV === 'development') {
+  base.module.rules.push({
+    test: /\.scss|.css$/,
+    use: [
+      'style-loader',
+      { loader: 'css-loader', options: { importLoaders: 3 } }, // 导入的sass加上前缀兼容
+      'sass-loader',
+      {
+        loader: 'sass-resources-loader',
+        options: {
+          resources: [resolve('src/static/sass/common/_base.scss')],
+        },
+      },
+      'postcss-loader',
+    ],
+  });
+} else {
+  base.module.rules.push(
+    {
+      test: /\.css$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader',
+        {
+          loader: 'postcss-loader',
+        },
+      ],
+    },
+    {
+      test: /\.scss$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        { loader: 'css-loader', options: { importLoaders: 3 } },
+        'sass-loader',
+        {
+          loader: 'sass-resources-loader',
+          options: {
+            resources: [resolve('src/static/sass/common/_base.scss')],
+          },
+        },
+        'postcss-loader',
+      ],
+    },
+  );
+}
 module.exports = base;

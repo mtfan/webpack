@@ -26,7 +26,7 @@ const config = merge(base, {
 		inline: true,
 		host: '0.0.0.0',
 		hot: true,
-		port: 8080,
+		port: 19000,
 		overlay: true,
 	},
 	module: {

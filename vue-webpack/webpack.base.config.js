@@ -78,8 +78,7 @@ if (process.env.NODE_ENV === 'development') {
 		test: /\.scss|.css$/,
 		use: [
 			'style-loader',
-			'css-loader',
-			'postcss-loader',
+			{ loader: 'css-loader', options: { importLoaders: 3 } }, // 导入的sass加上前缀兼容
 			'sass-loader',
 			{
 				loader: 'sass-resources-loader',
@@ -87,6 +86,7 @@ if (process.env.NODE_ENV === 'development') {
 					resources: [resolve('src/static/sass/common/_base.scss')],
 				},
 			},
+			'postcss-loader',
 		],
 	});
 } else {
@@ -105,8 +105,7 @@ if (process.env.NODE_ENV === 'development') {
 			test: /\.scss$/,
 			use: [
 				MiniCssExtractPlugin.loader,
-				'css-loader',
-				'postcss-loader',
+				{ loader: 'css-loader', options: { importLoaders: 3 } },
 				'sass-loader',
 				{
 					loader: 'sass-resources-loader',
@@ -114,6 +113,7 @@ if (process.env.NODE_ENV === 'development') {
 						resources: [resolve('src/static/sass/common/_base.scss')],
 					},
 				},
+				'postcss-loader',
 			],
 		},
 	);
