@@ -1,16 +1,15 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
-const merge = require('webpack-merge');
-const base = require('./webpack.base.config');
-const pkg = require('./package.json');
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const merge = require('webpack-merge')
+const base = require('./webpack.base.config')
+const pkg = require('./package.json')
 
 function resolve(dir) {
-  return path.join(__dirname, dir);
+  return path.join(__dirname, dir)
 }
 
 const config = merge(base, {
@@ -22,6 +21,29 @@ const config = merge(base, {
   output: {
     path: resolve('build'),
     filename: 'js/[name].[chunkhash:8].js'
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        minify: (file, sourceMap) => {
+          // https://github.com/mishoo/UglifyJS2#minify-options
+          const uglifyJsOptions = {
+            /* your `uglify-js` package options */
+            compress: {
+              drop_console: true
+            }
+          }
+
+          if (sourceMap) {
+            uglifyJsOptions.sourceMap = {
+              content: sourceMap
+            }
+          }
+
+          return require('uglify-js').minify(file, uglifyJsOptions)
+        }
+      })
+    ]
   },
   plugins: [
     new CleanWebpackPlugin(['build']),
@@ -76,10 +98,8 @@ const config = merge(base, {
       }
     })
   ]
-});
+})
 if (process.env.ANALY) {
-  config.plugins.push(
-    new BundleAnalyzerPlugin()
-  )
+  config.plugins.push(new BundleAnalyzerPlugin())
 }
-module.exports = config;
+module.exports = config
