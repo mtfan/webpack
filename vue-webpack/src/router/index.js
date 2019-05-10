@@ -3,26 +3,27 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 let router = new Router({
-	routes: [{
-		path: '/home',
-		// eslint-disable-next-line no-undef
-		component: resolve => require(['views/Home'], resolve)
-	},
-	{
-		path: '/found',
-		// eslint-disable-next-line no-undef
-		component: resolve => require(['views/Found'], resolve)
-	},
-	{
-		path: '/mine',
-		// eslint-disable-next-line no-undef
-		component: resolve => require(['views/Mine'], resolve)
-	},
-	{
-		path: '/',
-		redirect: '/home'
-	}
-	]
+	routes: [
+		{
+			path: '/home',
+			// eslint-disable-next-line no-undef
+			component: () => import(/* webpackChunkName:'home'*/ 'views/Home'),
+		},
+		{
+			path: '/found',
+			// eslint-disable-next-line no-undef
+			component: () => import(/* webpackChunkName:'found'*/ 'views/Found'),
+		},
+		{
+			path: '/mine',
+			// eslint-disable-next-line no-undef
+			component: () => import(/* webpackChunkName:'mine'*/ 'views/Mine'),
+		},
+		{
+			path: '/',
+			redirect: '/home',
+		},
+	],
 });
 
 router.beforeEach((to, from, next) => {
@@ -30,7 +31,7 @@ router.beforeEach((to, from, next) => {
 	if (to.path != '/login') {
 		if (f) {
 			next({
-				path: '/login'
+				path: '/login',
 			});
 			return;
 		}
