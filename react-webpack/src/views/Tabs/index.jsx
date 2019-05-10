@@ -5,9 +5,9 @@ import { withRouter } from 'react-router-dom';
 import WithLoadable from 'components/WithLoadable';
 import TabBarLink from 'components/TabBarLink';
 
-const Home = WithLoadable(() => import('views/Home'));
-const Found = WithLoadable(() => import('views/Found'));
-const MinePage = WithLoadable(() => import('views/Mine'));
+const Home = WithLoadable(() => import(/* webpackChunkName:'home'*/ 'views/Home'));
+const Found = WithLoadable(() => import(/* webpackChunkName:'found'*/ 'views/Found'));
+const MinePage = WithLoadable(() => import(/* webpackChunkName:'mine'*/ 'views/Mine'));
 
 import './index.scss';
 

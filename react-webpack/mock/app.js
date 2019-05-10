@@ -8,7 +8,7 @@ const upload = multer({
 });
 
 app.use(bodyParser.json());
-app.use(express.static(resolve("../build")))
+app.use(express.static(resolve("../dist")))
 
 function resolve(dir) {
   return path.join(__dirname, dir);

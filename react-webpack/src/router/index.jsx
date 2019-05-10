@@ -2,7 +2,7 @@ import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import WithLoadable from 'components/WithLoadable';
 
-const Tabs = WithLoadable(() => import('views/Tabs'));
+const Tabs = WithLoadable(() => import(/* webpackChunkName:'tabs'*/ 'views/Tabs'));
 
 const Router = () => {
   return (
