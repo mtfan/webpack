@@ -57,15 +57,9 @@ export default {
 		...mapActions(['userAction', 'getUserInfo'],
 		),
 		submit () {
-			this.homeMutation({ username: 'tom' });
-			this.$Toast.open({
-				toastTip: '全局组件测试'
-			});
-			setTimeout(() => {
-				this.getUserInfo({
-					username: 'hulei',
-				});
-			}, 2000);
+      import(/* webpackPrefetch: true */ './prefetch.js').then(({ default: handlerClick }) => {
+      	handlerClick.bind(this)();
+      });
 		},
 		onDragHandler () {
 			console.log('onDragHandler');
@@ -85,7 +79,6 @@ export default {
 	},
 };
 </script>
-
 <style lang="scss" scoped>
 .active {
 	color: aquamarine;
