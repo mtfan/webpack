@@ -5,6 +5,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 	.BundleAnalyzerPlugin;
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const merge = require('webpack-merge');
 const base = require('./webpack.base.config');
@@ -87,13 +88,28 @@ const config = merge(base, {
 		new HtmlWebpackPlugin({
 			template: resolve('index.html'),
 			favicon: resolve('favicon.ico'),
-			hash: true,
+			hash: false,
 			minify: {
 				caseSensitive: false,
 				removeComments: true,
 				removeEmptyAttributes: true,
 				collapseWhitespace: true,
 			},
+		}),
+		new WorkboxPlugin.GenerateSW({
+			cacheId: 'hl-pwa', // 设置前缀
+			skipWaiting: true, // 强制等待中的 Service Worker 被激活
+			clientsClaim: true, // Service Worker 被激活后使其立即获得页面控制权
+			swDest: 'service-worker.js', // 输出 Service worker 文件
+			globPatterns: ['**/*.{html,js,css,png.jpg}'], // 匹配的文件
+			globIgnores: ['service-worker.js'], // 忽略的文件
+			runtimeCaching: [
+				// 配置路由请求缓存
+				{
+					urlPattern: /.*\.js/, // 匹配文件
+					handler: 'networkFirst', // 网络优先
+				},
+			],
 		}),
 	],
 });
