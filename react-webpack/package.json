@@ -8,7 +8,7 @@
     "build:analy": "cross-env NODE_ENV=production ANALY=true webpack --config ./webpack.production.config.js --progress --colors",
     "build:log": "cross-env NODE_ENV=development webpack --config ./webpack.production.config.js --progress --colors",
     "build:log:analy": "cross-env NODE_ENV=development ANALY=true webpack --config ./webpack.production.config.js --progress --colors",
-    "dev:dev": "webpack-dev-server --progress --colors --watch --open",
+    "dev:dev": "cross-env NODE_ENV=development webpack-dev-server --progress --colors --watch --open",
     "dev:mock": "nodemon mock/app.js",
     "dev": "npm-run-all --parallel dev:**"
   },
@@ -79,6 +79,7 @@
     "webpack-bundle-analyzer": "^2.10.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.1",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^4.2.1",
+    "workbox-webpack-plugin": "^4.3.1"
   }
 }
