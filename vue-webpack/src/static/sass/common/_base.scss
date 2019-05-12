@@ -1,14 +1,12 @@
 @import './_mixins.scss';
 @import './_reset.scss';
+@import './_icon.scss';
 @import './_grid.scss';
 $base-font-color: #333 !default;
 $positive-font-color: #666 !default;
 $main-color: #ff6b69;
 $font-size-base: 14px !default;
-$font-family-base: '-apple-system',
-  'Helvetica Neue',
-  'Roboto',
-  'Segoe UI',
+$font-family-base: '-apple-system', 'Helvetica Neue', 'Roboto', 'Segoe UI',
   sans-serif !default;
 $line-height-computed: 20px !default;
 

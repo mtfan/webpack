@@ -11,6 +11,7 @@ const base = {
 		alias: {
 			vue$: 'vue/dist/vue.esm.js',
 			'@': resolve('src'),
+			'@scss': resolve('src/static/sass'),
 			components: resolve('src/components'),
 			views: resolve('src/views'),
 			api: resolve('src/api'),

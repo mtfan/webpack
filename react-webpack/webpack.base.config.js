@@ -1,9 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 function resolve(dir) {
-  return path.join(__dirname, dir);
+  return path.join(__dirname, dir)
 }
 
 const base = {
@@ -11,6 +11,7 @@ const base = {
     extensions: ['.js', '.jsx', '.css', '.scss'],
     alias: {
       '@': resolve('src'),
+      '@scss': resolve('src/static/sass'),
       reduxs: resolve('src/redux'),
       components: resolve('src/components'),
       views: resolve('src/views'),
@@ -20,14 +21,16 @@ const base = {
     }
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        use: [{
+        use: [
+          {
             loader: 'url-loader',
             options: {
               limit: 10000,
@@ -65,7 +68,7 @@ const base = {
       }
     })
   ]
-};
+}
 if (process.env.NODE_ENV === 'development') {
   base.module.rules.push({
     test: /\.scss|.css$/,
@@ -76,12 +79,12 @@ if (process.env.NODE_ENV === 'development') {
       {
         loader: 'sass-resources-loader',
         options: {
-          resources: [resolve('src/static/sass/common/_base.scss')],
-        },
+          resources: [resolve('src/static/sass/common/_base.scss')]
+        }
       },
-      'postcss-loader',
-    ],
-  });
+      'postcss-loader'
+    ]
+  })
 } else {
   base.module.rules.push(
     {
@@ -90,9 +93,9 @@ if (process.env.NODE_ENV === 'development') {
         MiniCssExtractPlugin.loader,
         'css-loader',
         {
-          loader: 'postcss-loader',
-        },
-      ],
+          loader: 'postcss-loader'
+        }
+      ]
     },
     {
       test: /\.scss$/,
@@ -103,12 +106,12 @@ if (process.env.NODE_ENV === 'development') {
         {
           loader: 'sass-resources-loader',
           options: {
-            resources: [resolve('src/static/sass/common/_base.scss')],
-          },
+            resources: [resolve('src/static/sass/common/_base.scss')]
+          }
         },
-        'postcss-loader',
-      ],
-    },
-  );
+        'postcss-loader'
+      ]
+    }
+  )
 }
-module.exports = base;
+module.exports = base

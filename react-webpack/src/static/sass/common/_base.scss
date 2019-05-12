@@ -1,5 +1,6 @@
 @import './_mixins.scss';
 @import './_reset.scss';
+@import './_icon.scss';
 @import './_grid.scss';
 $base-font-color: #333 !default;
 $positive-font-color: #666 !default;
@@ -224,6 +225,7 @@ button[disabled] {
 .main-margin {
   margin: 16px;
 }
-.vc-switch{
+
+.vc-switch {
   bottom: 100px !important;
 }
