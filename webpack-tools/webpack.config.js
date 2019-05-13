@@ -1,6 +1,6 @@
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-
+const CopyRightWebpackPlugin = require('./plugins/copyright-webpack-plugin')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
@@ -39,7 +39,7 @@ const config = {
     filename: '[name].[chunkhash:8].js'
   },
 
-  plugins: [new CleanWebpackPlugin()]
+  plugins: [new CleanWebpackPlugin(), new CopyRightWebpackPlugin({ copyright: 'copyright by hulei' })]
 }
 
 module.exports = config

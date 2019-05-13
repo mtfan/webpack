@@ -16,5 +16,5 @@ module.exports = function(source) {
   setTimeout(() => {
     let result = source.replace('huleia', options.name)
     callback(null, result)
-  }, 3000)
+  }, 1000)
 }
